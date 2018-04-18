@@ -22,8 +22,8 @@ export default class Settings extends Component<Props> {
   constructor() {
     super();
     this.state = {
-        Notify:true,
-        Theme:true
+      notify: true,
+      theme: true
     };
   }
   // Handles onPress of logout button
@@ -32,11 +32,11 @@ export default class Settings extends Component<Props> {
   }
 
   onChangedNotificationSettings(val){
-    this.setState({Notify: val});
+    this.setState({notify: val});
   }
 
   onChangedThemeSettings(val){
-    this.setState({Theme: val});
+    this.setState({theme: val});
   }
 
   render() {
@@ -48,7 +48,7 @@ export default class Settings extends Component<Props> {
             <View style={styles.container}>
               <Text>Weekly Reminders</Text>
               <Switch
-              value={this.state.Notify}
+              value={this.state.notify}
               onValueChange={(val) => this.onChangedNotificationSettings(val)}/>
             </View>
             <View style={styles.titleContainer}>
@@ -57,7 +57,7 @@ export default class Settings extends Component<Props> {
             <View style={styles.container}>
               <Text>Dark/Light App Theme</Text>
               <Switch
-              value={this.state.Theme}
+              value={this.state.theme}
               onValueChange={(val) => this.onChangedThemeSettings(val)}/>
             </View>
             <View style={styles.container}>

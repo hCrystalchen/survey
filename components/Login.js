@@ -18,17 +18,18 @@ const instructions = Platform.select({
 });
 
 type Props = {};
-export default class Demographics extends Component<Props> {
+
+export default class Login extends Component<Props> {
   constructor() {
     super();
     this.state = {
-      note: "The information you have provided will be used for research purpose only and will not be shared.",
-      prompt: 'A little bit about yourself...',
-      age:'',
-      married:'',
-      language:'',
-      home:'',
-      hostel:''
+        Note:"The information you have provided will be used for research purpose only and will not be shared.",
+        Prompt:'A little bit about yourself...',
+        Age:'',
+        Married:'',
+        Language:'',
+        Home:'',
+        Hostel:''
     };
   }
 
@@ -47,28 +48,28 @@ export default class Demographics extends Component<Props> {
               replacement = replacement + text[i];
           }
           else {
-              this.setState({age: ''});
+              this.setState({Age: ''});
               // alert the user to enter a number only
               alert("Please enter a number in the Age field");
           }
       }
       // update state
-      this.setState({ age: replacement});
+      this.setState({ Age: replacement});
   }
 
   // Handles onPress of start button: check if all fields are filled out and create contact on Qualtrics
   onStart() {
-    if (this.state.age == '' || this.state.married == '' || this.state.language == '' || this.state.home == '' || this.state.hostel == '') {
+    if (this.state.Age == '' || this.state.Married == '' || this.state.Language == '' || this.state.Home == '' || this.state.Hostel == '') {
         alert('Please fill out all fields before proceeding');
     } else {
-        // send demographics info as fields of contact to Qualtrics and create new contact
+        // send Login info as fields of contact to Qualtrics and create new contact
     }
   }
   render() {
 //    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text style={styles.pageTitle}>{this.state.prompt}{'\n'}{'\n'}</Text>
+        <Text style={styles.pageTitle}>{this.state.Prompt}{'\n'}{'\n'}</Text>
 
         <View style={styles.titleContainer}>
             <Text style={styles.titleText}>Age</Text>
@@ -77,7 +78,7 @@ export default class Demographics extends Component<Props> {
            style={styles.textInput}
            keyboardType='numeric'
            onChangeText={(text)=> this.onAgeChanged(text)}
-           value={this.state.age}
+           value={this.state.Age}
            maxLength={2}
         />
         <View style={styles.titleContainer}>
@@ -85,8 +86,8 @@ export default class Demographics extends Component<Props> {
         </View>
         <Picker
           style={styles.picker}
-          selectedValue= {this.state.married}
-          onValueChange={(itemValue, itemIndex) => this.setState({married: itemValue})}>
+          selectedValue= {this.state.Married}
+          onValueChange={(itemValue, itemIndex) => this.setState({Married: itemValue})}>
           <Picker.Item label="" value=""/>
           <Picker.Item label="Married" value="married" />
           <Picker.Item label="Not married, but in relationship" value="relationship" />
@@ -98,8 +99,8 @@ export default class Demographics extends Component<Props> {
         </View>
         <Picker
           style={styles.picker}
-          selectedValue= {this.state.language}
-          onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+          selectedValue= {this.state.Language}
+          onValueChange={(itemValue, itemIndex) => this.setState({Language: itemValue})}>
           <Picker.Item label="" value=""/>
           <Picker.Item label="Nyanja" value="nyanja" />
           <Picker.Item label="Bemba" value="bemba" />
@@ -112,8 +113,8 @@ export default class Demographics extends Component<Props> {
         </View>
         <Picker
           style={styles.picker}
-          selectedValue= {this.state.home}
-          onValueChange={(itemValue, itemIndex) => this.setState({home: itemValue})}>
+          selectedValue= {this.state.Home}
+          onValueChange={(itemValue, itemIndex) => this.setState({Home: itemValue})}>
           <Picker.Item label="" value=""/>
           <Picker.Item label="Central" value="central" />
           <Picker.Item label="Copperbelt" value="copperbelt" />
@@ -133,15 +134,15 @@ export default class Demographics extends Component<Props> {
         </View>
         <Picker
           style={styles.picker}
-          selectedValue= {this.state.hostel}
-          onValueChange={(itemValue, itemIndex) => this.setState({hostel: itemValue})}>
+          selectedValue= {this.state.Hostel}
+          onValueChange={(itemValue, itemIndex) => this.setState({Hostel: itemValue})}>
           <Picker.Item label="" value=""/>
           <Picker.Item label="Option 1" value="1" />
           <Picker.Item label="Option 2" value="2" />
           <Picker.Item label="Option 3" value="3" />
         </Picker>
 
-        <Text style={styles.note}>{this.state.note}{'\n'}{'\n'}</Text>
+        <Text style={styles.note}>{this.state.Note}{'\n'}{'\n'}</Text>
 
         <TouchableOpacity style={styles.button} onPress={()=> this.onStart()}>
             <Text style={styles.buttonText}>Get Started!</Text>

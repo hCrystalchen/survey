@@ -4,6 +4,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 import Settings from 'survey/components/Settings';
 import Demographics from 'survey/components/Demographics';
 import Login from 'survey/components/Login';
+import Register from 'survey/components/Register';
 
 // This file contains all of the routes/screen configurations for our app.
 export const Root = StackNavigator({
@@ -14,13 +15,19 @@ export const Root = StackNavigator({
     },
   },
 
+  Register: {
+    screen: Register,
+  },
+
   Settings: {
     screen: Settings,
   },
 
   Demographics: {
     screen: Demographics,
-  }
+  },
+
+
   
 });
 // }, 

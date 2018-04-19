@@ -74,12 +74,12 @@ export default class Settings extends Component<Props> {
 
 const styles = StyleSheet.create({
   titleContainer: {
-    width: '80%',
+    width: GLOBALS.STYLES.WIDTH,
     backgroundColor: GLOBALS.COLOR.BLUE,
   },
   titleText: {
     textAlign: 'left',
-    fontSize: 16,
+    fontSize: GLOBALS.FONTSIZE.TEXT,
     padding: 10,
     color: GLOBALS.COLOR.TITLETEXT
   },
@@ -87,14 +87,14 @@ const styles = StyleSheet.create({
     width:'100%',
     backgroundColor: GLOBALS.COLOR.BLUE,
     padding: 10,
-    borderRadius: 15,
+    borderRadius: GLOBALS.STYLES.CORNER,
     elevation: 3,
     marginTop: '30%'
   },
   buttonText: {
     textAlign: 'center',
     color: GLOBALS.COLOR.TITLETEXT,
-    fontSize: 18
+    fontSize: GLOBALS.FONTSIZE.BUTTON
   },
   page: {
     flex: 1,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     backgroundColor: GLOBALS.COLOR.LIGHTBLUE,
   },
   container: {
-    width:'80%',
+    width: GLOBALS.STYLES.WIDTH,
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: GLOBALS.COLOR.LIGHTBLUE,

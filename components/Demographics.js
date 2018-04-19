@@ -34,7 +34,7 @@ export default class Demographics extends Component<Props> {
   }
 
   static navigationOptions = {
-    title: 'Welcome',
+    title: 'Demographics',
   }
   // Ensures that only number input can be entered in the age field
   onAgeChanged(text){
@@ -63,10 +63,11 @@ export default class Demographics extends Component<Props> {
         alert('Please fill out all fields before proceeding');
     } else {
         // send demographics info as fields of contact to Qualtrics and create new contact
+        // also temporary, should direct to DASHBOARD
+        this.props.navigation.navigate('Settings');
     }
   }
   render() {
-//    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <Text style={styles.pageTitle}>{this.state.prompt}{'\n'}{'\n'}</Text>
@@ -155,42 +156,42 @@ export default class Demographics extends Component<Props> {
 const styles = StyleSheet.create({
   pageTitle: {
     textAlign: 'left',
-    width: '80%',
-    fontSize: 20
+    width: GLOBALS.STYLES.WIDTH,
+    fontSize: GLOBALS.FONTSIZE.TITLE
   },
   note: {
     textAlign: 'left',
-    width: '80%',
-    fontSize: 14
+    width: GLOBALS.STYLES.WIDTH,
+    fontSize: GLOBALS.FONTSIZE.NOTE
   },
   button: {
     width:'80%',
     backgroundColor: GLOBALS.COLOR.BLUE,
     padding: 10,
-    borderRadius: 15,
+    borderRadius: GLOBALS.STYLES.CORNER,
     elevation: 3
   },
   buttonText: {
     textAlign: 'center',
     color: GLOBALS.COLOR.TITLETEXT,
-    fontSize: 18
+    fontSize: GLOBALS.FONTSIZE.BUTTON
   },
   textInput: {
-    width: '80%',
+    width: GLOBALS.STYLES.WIDTH,
     textAlign:'center'
   },
   picker: {
     height: 50,
-    width: '80%',
+    width: GLOBALS.STYLES.WIDTH,
     justifyContent: 'center'
   },
   titleContainer: {
-    width: '80%',
+    width: GLOBALS.STYLES.WIDTH,
     backgroundColor: GLOBALS.COLOR.BLUE,
   },
   titleText: {
     textAlign: 'left',
-    fontSize: 16,
+    fontSize: GLOBALS.FONTSIZE.TEXT,
     padding: 10,
     color: GLOBALS.COLOR.TITLETEXT
   },

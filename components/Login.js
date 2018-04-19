@@ -6,8 +6,9 @@ import GLOBALS from 'survey/components/Globals.js';
 import {
   StackNavigator,
   View,
-  Button,
+  TouchableOpacity,
   Text,
+  TextInput,
   Platform,
   StyleSheet
 } from 'react-native';
@@ -77,26 +78,47 @@ class Login extends Component<Props> {
     };
   }
 
+  onLogin() {
+    // temporary, for testing only
+    this.props.navigation.navigate('Demographics');
+    this.authorize
+  }
+
+  onSignup() {
+    this.props.navigation.navigate('Register');
+  }
   render() {
     const { accessToken, accessTokenExpirationDate} = this.state;
     const { container, createAccount } = styles;
 
     return (
-      <View style={container}>
-        {/* <Demographics/> */}
-
-        <Button 
-          style={createAccount}
-          onPress={() => {
-            this.props.navigation.navigate('Register');
-            this.authorize
-          }} 
-          title="Create Account"
-          // text="Create Account" 
-          color="#017CC0"
-        />
-        {/* <Settings/> */}
-      </View>
+      <View style={styles.container}>
+          <View style={{height: '45%'}}></View>
+          <TextInput style={styles.input}
+              underlineColorAndroid='rgba(0,0,0,0)'
+              placeholder="Username"
+              placeholderTextColor = "#ffffff"
+              selectionColor="#ffffff"
+              keyboardType="default"
+              onSubmitEditing={()=> this.password.focus()}
+              />
+          <TextInput style={styles.input}
+              underlineColorAndroid='rgba(0,0,0,0)'
+              placeholder="Password"
+              secureTextEntry={true}
+              placeholderTextColor = "#ffffff"
+              ref={(input) => this.password = input}
+              />
+        <TouchableOpacity style={styles.button} onPress={()=> this.onLogin()}>
+            <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+		<View style={styles.textContainer}>
+			<Text style={styles.text}>Do not have an account?</Text>
+			<TouchableOpacity onPress={()=> this.onSignup()}>
+			    <Text style={styles.textButton}> Sign up</Text>
+		    </TouchableOpacity>
+		</View>
+        </View>
     );
   }
 }
@@ -104,17 +126,47 @@ class Login extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: GLOBALS.COLOR.LIGHTBLUE,
     alignItems: 'center',
-    backgroundColor: '#90caf9',
   },
-
-  createAccount: {
-    flex: 1,
-    fontSize: 18,
-    fontWeight: 'bold',
+  button: {
+    width: GLOBALS.STYLES.WIDTH,
+    backgroundColor: GLOBALS.COLOR.BLUE,
+    padding: 10,
+    borderRadius: GLOBALS.STYLES.CORNER,
+    elevation: 3,
+    marginVertical: GLOBALS.STYLES.YMARGIN
+  },
+  buttonText: {
+    textAlign: 'center',
+    color: GLOBALS.COLOR.TITLETEXT,
+    fontSize: GLOBALS.FONTSIZE.BUTTON
+  },
+  input: {
+    width: GLOBALS.STYLES.WIDTH,
+    backgroundColor: GLOBALS.COLOR.TRANSPARENTWHITE,
+    borderRadius: GLOBALS.STYLES.CORNER,
+    paddingHorizontal:16,
+    fontSize: GLOBALS.FONTSIZE.TEXT,
+    color: GLOBALS.COLOR.TITLETEXT,
+    marginVertical: GLOBALS.STYLES.YMARGIN
+  },
+  textContainer: {
+  	flexGrow: 1,
+    alignItems:'flex-end',
+    justifyContent:'center',
+    paddingVertical:16,
+    flexDirection:'row'
+  },
+  text: {
+  	color: GLOBALS.COLOR.TEXT,
+  	fontSize: GLOBALS.FONTSIZE.TEXT
+  },
+  textButton: {
+  	color: GLOBALS.COLOR.TITLETEXT,
+  	fontSize: GLOBALS.FONTSIZE.TEXT,
+  	fontWeight:'500'
   }
 });
 

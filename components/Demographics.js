@@ -59,13 +59,12 @@ export default class Demographics extends Component<Props> {
 
   // Handles onPress of start button: check if all fields are filled out and create contact on Qualtrics
   onStart() {
-    if (this.state.age == '' || this.state.married == '' || this.state.language == '' || this.state.home == '' || this.state.hostel == '') {
-        alert('Please fill out all fields before proceeding');
-    } else {
+//    if (this.state.age == '' || this.state.married == '' || this.state.language == '' || this.state.home == '' || this.state.hostel == '') {
+//        alert('Please fill out all fields before proceeding');
+//    } else {
         // send demographics info as fields of contact to Qualtrics and create new contact
-        // also temporary, should direct to DASHBOARD
-        this.props.navigation.navigate('Settings');
-    }
+        this.props.navigation.navigate('Dashboard');
+//    }
   }
   render() {
     return (

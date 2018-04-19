@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GLOBALS from './Globals.js';
 import {
   Platform,
   StyleSheet,
@@ -164,14 +165,14 @@ const styles = StyleSheet.create({
   },
   button: {
     width:'80%',
-    backgroundColor: '#5d99c6',
+    backgroundColor: GLOBALS.COLOR.BLUE,
     padding: 10,
     borderRadius: 15,
     elevation: 3
   },
   buttonText: {
     textAlign: 'center',
-    color: 'white',
+    color: GLOBALS.COLOR.TITLETEXT,
     fontSize: 18
   },
   textInput: {
@@ -185,18 +186,18 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     width: '80%',
-    backgroundColor: '#5d99c6',
+    backgroundColor: GLOBALS.COLOR.BLUE,
   },
   titleText: {
     textAlign: 'left',
     fontSize: 16,
     padding: 10,
-    color: 'white'
+    color: GLOBALS.COLOR.TITLETEXT
   },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#90caf9',
+    backgroundColor: GLOBALS.COLOR.LIGHTBLUE,
   }
 });

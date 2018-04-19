@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import GLOBALS from './Globals.js';
+
 import {
   Platform,
   StyleSheet,
@@ -55,7 +57,7 @@ export default class Settings extends Component<Props> {
                 <Text style={styles.titleText}>Theme Settings</Text>
             </View>
             <View style={styles.container}>
-              <Text>Dark/Light App Theme</Text>
+              <Text>Light Theme</Text>
               <Switch
               value={this.state.Theme}
               onValueChange={(val) => this.onChangedThemeSettings(val)}/>
@@ -73,17 +75,17 @@ export default class Settings extends Component<Props> {
 const styles = StyleSheet.create({
   titleContainer: {
     width: '80%',
-    backgroundColor: '#5d99c6',
+    backgroundColor: GLOBALS.COLOR.BLUE,
   },
   titleText: {
     textAlign: 'left',
     fontSize: 16,
     padding: 10,
-    color: 'white'
+    color: GLOBALS.COLOR.TITLETEXT
   },
   button: {
     width:'100%',
-    backgroundColor: '#5d99c6',
+    backgroundColor: GLOBALS.COLOR.BLUE,
     padding: 10,
     borderRadius: 15,
     elevation: 3,
@@ -91,20 +93,20 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: 'center',
-    color: 'white',
+    color: GLOBALS.COLOR.TITLETEXT,
     fontSize: 18
   },
   page: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#90caf9',
+    backgroundColor: GLOBALS.COLOR.LIGHTBLUE,
   },
   container: {
     width:'80%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#90caf9',
+    backgroundColor: GLOBALS.COLOR.LIGHTBLUE,
     marginTop: '2%'
   }
 });

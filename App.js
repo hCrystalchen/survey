@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import Demographics from "./components/Demographics.js";
 import Settings from "./components/Settings.js";
+import GLOBALS from './components/Globals.js';
 
 import {
   StackNavigator,
@@ -33,7 +34,7 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Settings/>
+        <Demographics/>
       </View>
     );
   }
@@ -43,6 +44,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#90caf9',
+    backgroundColor: GLOBALS.COLOR.LIGHTBLUE,
   }
 });

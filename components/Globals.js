@@ -6,6 +6,7 @@ export default {
   COLOR: {
     LIGHTBLUE: '#90caf9',
     BLUE: '#5d99c6',
+    LIGHTTAN: '#FFE38C',
     TITLETEXT: 'white'
   },
 };

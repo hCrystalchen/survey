@@ -89,10 +89,8 @@ class Login extends Component<Props> {
           style={createAccount}
           onPress={() => {
             this.props.navigation.navigate('Register');
-            this.authorize
           }} 
           title="Create Account"
-          // text="Create Account" 
           color="#017CC0"
         />
         {/* <Settings/> */}

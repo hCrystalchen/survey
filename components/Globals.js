@@ -9,7 +9,9 @@ export default {
     TITLETEXT: 'white',
     TRANSPARENTWHITE: 'rgba(255, 255, 255, 0.2)',
     TRANSPARENT: 'rgba(0, 0, 0, 0)',
-    TEXT: 'grey'
+    TEXT: 'grey',
+    LIGHTTAN: '#FFE38C',
+    TITLETEXT: 'white'
   },
   STYLES: {
     CORNER: 15,

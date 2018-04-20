@@ -17,6 +17,9 @@ export const Root = StackNavigator({
   },
 
   Register: {
+    navigationOptions: {
+      title: 'User Registration',
+    },
     screen: Register,
   },
 
@@ -30,8 +33,10 @@ export const Root = StackNavigator({
 
   Dashboard: {
     screen: Dashboard,
+    navigationOptions: {
+      title: 'Demographics',
+    },
   },
-  
 });
 // }, 
 // {

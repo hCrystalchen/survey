@@ -63,7 +63,7 @@ export default class Demographics extends Component<Props> {
 //        alert('Please fill out all fields before proceeding');
 //    } else {
         // send demographics info as fields of contact to Qualtrics and create new contact
-        this.props.navigation.navigate('Dashboard');
+        this.props.navigation.navigate('Dash');
 //    }
   }
   render() {

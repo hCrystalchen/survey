@@ -31,9 +31,6 @@ export default class Settings extends Component<Props> {
 
   }
 
-  openSettings() {
-    this.props.navigation.navigate('Settings');
-  }
   render() {
     return (
       <View style={styles.page}>
@@ -44,11 +41,6 @@ export default class Settings extends Component<Props> {
               <TouchableOpacity style={styles.button} onPress={()=> this.onTakeSurvey()}>
                   <Text style={styles.buttonText}>Take Survey</Text>
               </TouchableOpacity>
-            </View>
-            <View style={styles.textContainer}>
-                <TouchableOpacity onPress={()=> this.openSettings()}>
-                    <Text style={styles.textButton}>Settings</Text>
-                </TouchableOpacity>
             </View>
 	  </View>
     );
@@ -99,13 +91,4 @@ const styles = StyleSheet.create({
     paddingVertical: GLOBALS.FONTSIZE.TEXT,
     flexDirection:'row'
   },
-  text: {
-  	color: GLOBALS.COLOR.TEXT,
-  	fontSize: GLOBALS.FONTSIZE.TEXT
-  },
-  textButton: {
-  	color: GLOBALS.COLOR.TITLETEXT,
-  	fontSize: GLOBALS.FONTSIZE.TEXT,
-  	fontWeight:'500'
-  }
 });

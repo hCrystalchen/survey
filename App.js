@@ -1,10 +1,5 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
+<<<<<<< HEAD
 //import Demographics from "./components/Demographics.js";
 import { Settings } from "./components/Settings.js";
 import { UIManager, LayoutAnimation } from 'react-native';
@@ -158,3 +153,14 @@ export default class App extends Component<{}, State> {
 //     backgroundColor: '#90caf9',
 //   }
 // });
+=======
+import { Root } from 'survey/config/router';
+
+class App extends Component {
+  render() {
+    return <Root />;
+  }
+}
+
+export default App;
+>>>>>>> 229d844e3538047db85cb25d033388bf63fd2958

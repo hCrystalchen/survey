@@ -24,51 +24,33 @@ export default class Settings extends Component<Props> {
   constructor() {
     super();
     this.state = {
-      notify: true,
-      theme: true
     };
   }
-  // Handles onPress of logout button
-  onLogout() {
-    // temporary
-    this.props.navigation.navigate('Login');
+
+  onTakeSurvey(){
+
   }
 
-  onChangedNotificationSettings(val){
-    this.setState({notify: val});
+  openSettings() {
+    this.props.navigation.navigate('Settings');
   }
-
-  onChangedThemeSettings(val){
-    this.setState({theme: val});
-  }
-
   render() {
     return (
       <View style={styles.page}>
             <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>Notification Settings</Text>
+                <Text style={styles.titleText}>DASHBOARD GOES HERE</Text>
             </View>
             <View style={styles.container}>
-              <Text>Weekly Reminders</Text>
-              <Switch
-              value={this.state.notify}
-              onValueChange={(val) => this.onChangedNotificationSettings(val)}/>
-            </View>
-            <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>Theme Settings</Text>
-            </View>
-            <View style={styles.container}>
-              <Text>Light Theme</Text>
-              <Switch
-              value={this.state.theme}
-              onValueChange={(val) => this.onChangedThemeSettings(val)}/>
-            </View>
-            <View style={styles.container}>
-              <TouchableOpacity style={styles.button} onPress={()=> this.onLogout()}>
-                  <Text style={styles.buttonText}>Logout</Text>
+              <TouchableOpacity style={styles.button} onPress={()=> this.onTakeSurvey()}>
+                  <Text style={styles.buttonText}>Take Survey</Text>
               </TouchableOpacity>
             </View>
-      </View>
+            <View style={styles.textContainer}>
+                <TouchableOpacity onPress={()=> this.openSettings()}>
+                    <Text style={styles.textButton}>Settings</Text>
+                </TouchableOpacity>
+            </View>
+	  </View>
     );
   }
 }
@@ -109,6 +91,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: GLOBALS.COLOR.LIGHTBLUE,
     marginTop: '2%'
+  },
+  textContainer: {
+  	flexGrow: 1,
+    alignItems:'flex-end',
+    justifyContent:'center',
+    paddingVertical: GLOBALS.FONTSIZE.TEXT,
+    flexDirection:'row'
+  },
+  text: {
+  	color: GLOBALS.COLOR.TEXT,
+  	fontSize: GLOBALS.FONTSIZE.TEXT
+  },
+  textButton: {
+  	color: GLOBALS.COLOR.TITLETEXT,
+  	fontSize: GLOBALS.FONTSIZE.TEXT,
+  	fontWeight:'500'
   }
 });
-

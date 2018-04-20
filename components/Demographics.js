@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GLOBALS from './Globals.js';
 import {
   Platform,
   StyleSheet,
@@ -22,18 +23,18 @@ export default class Demographics extends Component<Props> {
   constructor() {
     super();
     this.state = {
-        Note:"The information you have provided will be used for research purpose only and will not be shared.",
-        Prompt:'A little bit about yourself...',
-        Age:'',
-        Married:'',
-        Language:'',
-        Home:'',
-        Hostel:''
+      note: "The information you have provided will be used for research purpose only and will not be shared.",
+      prompt: 'A little bit about yourself...',
+      age:'',
+      married:'',
+      language:'',
+      home:'',
+      hostel:''
     };
   }
 
   static navigationOptions = {
-    title: 'Welcome',
+    title: 'Demographics',
   }
   // Ensures that only number input can be entered in the age field
   onAgeChanged(text){
@@ -47,28 +48,28 @@ export default class Demographics extends Component<Props> {
               replacement = replacement + text[i];
           }
           else {
-              this.setState({Age: ''});
+              this.setState({age: ''});
               // alert the user to enter a number only
               alert("Please enter a number in the Age field");
           }
       }
       // update state
-      this.setState({ Age: replacement});
+      this.setState({ age: replacement});
   }
 
   // Handles onPress of start button: check if all fields are filled out and create contact on Qualtrics
   onStart() {
-    if (this.state.Age == '' || this.state.Married == '' || this.state.Language == '' || this.state.Home == '' || this.state.Hostel == '') {
-        alert('Please fill out all fields before proceeding');
-    } else {
+//    if (this.state.age == '' || this.state.married == '' || this.state.language == '' || this.state.home == '' || this.state.hostel == '') {
+//        alert('Please fill out all fields before proceeding');
+//    } else {
         // send demographics info as fields of contact to Qualtrics and create new contact
-    }
+        this.props.navigation.navigate('Dashboard');
+//    }
   }
   render() {
-//    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text style={styles.pageTitle}>{this.state.Prompt}{'\n'}{'\n'}</Text>
+        <Text style={styles.pageTitle}>{this.state.prompt}{'\n'}{'\n'}</Text>
 
         <View style={styles.titleContainer}>
             <Text style={styles.titleText}>Age</Text>
@@ -77,7 +78,7 @@ export default class Demographics extends Component<Props> {
            style={styles.textInput}
            keyboardType='numeric'
            onChangeText={(text)=> this.onAgeChanged(text)}
-           value={this.state.Age}
+           value={this.state.age}
            maxLength={2}
         />
         <View style={styles.titleContainer}>
@@ -85,8 +86,8 @@ export default class Demographics extends Component<Props> {
         </View>
         <Picker
           style={styles.picker}
-          selectedValue= {this.state.Married}
-          onValueChange={(itemValue, itemIndex) => this.setState({Married: itemValue})}>
+          selectedValue= {this.state.married}
+          onValueChange={(itemValue, itemIndex) => this.setState({married: itemValue})}>
           <Picker.Item label="" value=""/>
           <Picker.Item label="Married" value="married" />
           <Picker.Item label="Not married, but in relationship" value="relationship" />
@@ -98,8 +99,8 @@ export default class Demographics extends Component<Props> {
         </View>
         <Picker
           style={styles.picker}
-          selectedValue= {this.state.Language}
-          onValueChange={(itemValue, itemIndex) => this.setState({Language: itemValue})}>
+          selectedValue= {this.state.language}
+          onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
           <Picker.Item label="" value=""/>
           <Picker.Item label="Nyanja" value="nyanja" />
           <Picker.Item label="Bemba" value="bemba" />
@@ -112,8 +113,8 @@ export default class Demographics extends Component<Props> {
         </View>
         <Picker
           style={styles.picker}
-          selectedValue= {this.state.Home}
-          onValueChange={(itemValue, itemIndex) => this.setState({Home: itemValue})}>
+          selectedValue= {this.state.home}
+          onValueChange={(itemValue, itemIndex) => this.setState({home: itemValue})}>
           <Picker.Item label="" value=""/>
           <Picker.Item label="Central" value="central" />
           <Picker.Item label="Copperbelt" value="copperbelt" />
@@ -133,15 +134,15 @@ export default class Demographics extends Component<Props> {
         </View>
         <Picker
           style={styles.picker}
-          selectedValue= {this.state.Hostel}
-          onValueChange={(itemValue, itemIndex) => this.setState({Hostel: itemValue})}>
+          selectedValue= {this.state.hostel}
+          onValueChange={(itemValue, itemIndex) => this.setState({hostel: itemValue})}>
           <Picker.Item label="" value=""/>
           <Picker.Item label="Option 1" value="1" />
           <Picker.Item label="Option 2" value="2" />
           <Picker.Item label="Option 3" value="3" />
         </Picker>
 
-        <Text style={styles.note}>{this.state.Note}{'\n'}{'\n'}</Text>
+        <Text style={styles.note}>{this.state.note}{'\n'}{'\n'}</Text>
 
         <TouchableOpacity style={styles.button} onPress={()=> this.onStart()}>
             <Text style={styles.buttonText}>Get Started!</Text>
@@ -154,50 +155,50 @@ export default class Demographics extends Component<Props> {
 const styles = StyleSheet.create({
   pageTitle: {
     textAlign: 'left',
-    width: '80%',
-    fontSize: 20
+    width: GLOBALS.STYLES.WIDTH,
+    fontSize: GLOBALS.FONTSIZE.TITLE
   },
   note: {
     textAlign: 'left',
-    width: '80%',
-    fontSize: 14
+    width: GLOBALS.STYLES.WIDTH,
+    fontSize: GLOBALS.FONTSIZE.NOTE
   },
   button: {
     width:'80%',
-    backgroundColor: '#5d99c6',
+    backgroundColor: GLOBALS.COLOR.BLUE,
     padding: 10,
-    borderRadius: 15,
+    borderRadius: GLOBALS.STYLES.CORNER,
     elevation: 3
   },
   buttonText: {
     textAlign: 'center',
-    color: 'white',
-    fontSize: 18
+    color: GLOBALS.COLOR.TITLETEXT,
+    fontSize: GLOBALS.FONTSIZE.BUTTON
   },
   textInput: {
-    width: '80%',
+    width: GLOBALS.STYLES.WIDTH,
     textAlign:'center'
   },
   picker: {
     height: 50,
-    width: '80%',
+    width: GLOBALS.STYLES.WIDTH,
     justifyContent: 'center'
   },
   titleContainer: {
-    width: '80%',
-    backgroundColor: '#5d99c6',
+    width: GLOBALS.STYLES.WIDTH,
+    backgroundColor: GLOBALS.COLOR.BLUE,
   },
   titleText: {
     textAlign: 'left',
-    fontSize: 16,
+    fontSize: GLOBALS.FONTSIZE.TEXT,
     padding: 10,
-    color: 'white'
+    color: GLOBALS.COLOR.TITLETEXT
   },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#90caf9',
+    backgroundColor: GLOBALS.COLOR.LIGHTBLUE,
   }
 });
 

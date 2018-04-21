@@ -4,6 +4,8 @@ import _ from 'lodash';
 import GLOBALS from './Globals.js';
 
 import Form from 'react-native-form';
+import { WebView } from 'react-native';
+
 
 import {
   StackNavigator,
@@ -27,6 +29,7 @@ export default class Register extends Component<Props> {
 
     this.state = {
       hasRegistered: false,
+      openWebView: false,
     }
   }
   
@@ -104,7 +107,7 @@ export default class Register extends Component<Props> {
             onPress={() => this.props.navigation.navigate('Demographics')}
           />
         </View>
-      : <Form ref="form">
+      : (<Form ref="form">
           <TextInput
             type="TextInput"
             name="firstName"
@@ -136,7 +139,23 @@ export default class Register extends Component<Props> {
               this.handleSubmit();
             }}
           />
-        </Form> 
+
+          <Button
+            title="WebView"
+            onPress={() => {
+              this.setState({
+                openWebView: true,
+              });
+            }}
+          />
+
+          {this.state.openWebView &&
+            <WebView
+              source={{uri: 'https://github.com/facebook/react-native'}}
+              style={{marginTop: 20}}
+            />
+          }
+      </Form>) 
       }
       </View>
     );

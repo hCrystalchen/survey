@@ -28,7 +28,7 @@ export default class Settings extends Component<Props> {
   }
 
   onTakeSurvey(){
-
+    this.props.navigation.navigate('InAppSurvey');
   }
 
   openSettings() {

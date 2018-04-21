@@ -8,6 +8,7 @@ import {
   Picker,
   TextInput,
   Button,
+  ScrollView,
   TouchableOpacity
 } from 'react-native';
 
@@ -69,84 +70,86 @@ export default class Demographics extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.pageTitle}>{this.state.prompt}{'\n'}{'\n'}</Text>
+        <ScrollView>
+          <Text style={styles.pageTitle}>{this.state.prompt}{'\n'}{'\n'}</Text>
 
-        <View style={styles.titleContainer}>
-            <Text style={styles.titleText}>Age</Text>
-        </View>
-        <TextInput
-           style={styles.textInput}
-           keyboardType='numeric'
-           onChangeText={(text)=> this.onAgeChanged(text)}
-           value={this.state.age}
-           maxLength={2}
-        />
-        <View style={styles.titleContainer}>
-            <Text style={styles.titleText}>Marital Status</Text>
-        </View>
-        <Picker
-          style={styles.picker}
-          selectedValue= {this.state.married}
-          onValueChange={(itemValue, itemIndex) => this.setState({married: itemValue})}>
-          <Picker.Item label="" value=""/>
-          <Picker.Item label="Married" value="married" />
-          <Picker.Item label="Not married, but in relationship" value="relationship" />
-          <Picker.Item label="Single" value="single" />
-        </Picker>
+          <View style={styles.titleContainer}>
+              <Text style={styles.titleText}>Age</Text>
+          </View>
+          <TextInput
+            style={styles.textInput}
+            keyboardType='numeric'
+            onChangeText={(text)=> this.onAgeChanged(text)}
+            value={this.state.age}
+            maxLength={2}
+          />
+          <View style={styles.titleContainer}>
+              <Text style={styles.titleText}>Marital Status</Text>
+          </View>
+          <Picker
+            style={styles.picker}
+            selectedValue= {this.state.married}
+            onValueChange={(itemValue, itemIndex) => this.setState({married: itemValue})}>
+            <Picker.Item label="" value=""/>
+            <Picker.Item label="Married" value="married" />
+            <Picker.Item label="Not married, but in relationship" value="relationship" />
+            <Picker.Item label="Single" value="single" />
+          </Picker>
 
-        <View style={styles.titleContainer}>
-            <Text style={styles.titleText}>Native Language</Text>
-        </View>
-        <Picker
-          style={styles.picker}
-          selectedValue= {this.state.language}
-          onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-          <Picker.Item label="" value=""/>
-          <Picker.Item label="Nyanja" value="nyanja" />
-          <Picker.Item label="Bemba" value="bemba" />
-          <Picker.Item label="English" value="english"/>
-          <Picker.Item label="Other" value="other"/>
-        </Picker>
+          <View style={styles.titleContainer}>
+              <Text style={styles.titleText}>Native Language</Text>
+          </View>
+          <Picker
+            style={styles.picker}
+            selectedValue= {this.state.language}
+            onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+            <Picker.Item label="" value=""/>
+            <Picker.Item label="Nyanja" value="nyanja" />
+            <Picker.Item label="Bemba" value="bemba" />
+            <Picker.Item label="English" value="english"/>
+            <Picker.Item label="Other" value="other"/>
+          </Picker>
 
-        <View style={styles.titleContainer}>
-            <Text style={styles.titleText}>Home Province</Text>
-        </View>
-        <Picker
-          style={styles.picker}
-          selectedValue= {this.state.home}
-          onValueChange={(itemValue, itemIndex) => this.setState({home: itemValue})}>
-          <Picker.Item label="" value=""/>
-          <Picker.Item label="Central" value="central" />
-          <Picker.Item label="Copperbelt" value="copperbelt" />
-          <Picker.Item label="Eastern" value="eastern"/>
-          <Picker.Item label="Luapula" value="luapula"/>
-          <Picker.Item label="Lusaka" value="lusaka"/>
-          <Picker.Item label="Muchinga" value="muchinga"/>
-          <Picker.Item label="North-Western" value="north-western"/>
-          <Picker.Item label="Northern" value="northern"/>
-          <Picker.Item label="Southern" value="southern"/>
-          <Picker.Item label="Western" value="western"/>
-        </Picker>
+          <View style={styles.titleContainer}>
+              <Text style={styles.titleText}>Home Province</Text>
+          </View>
+          <Picker
+            style={styles.picker}
+            selectedValue= {this.state.home}
+            onValueChange={(itemValue, itemIndex) => this.setState({home: itemValue})}>
+            <Picker.Item label="" value=""/>
+            <Picker.Item label="Central" value="central" />
+            <Picker.Item label="Copperbelt" value="copperbelt" />
+            <Picker.Item label="Eastern" value="eastern"/>
+            <Picker.Item label="Luapula" value="luapula"/>
+            <Picker.Item label="Lusaka" value="lusaka"/>
+            <Picker.Item label="Muchinga" value="muchinga"/>
+            <Picker.Item label="North-Western" value="north-western"/>
+            <Picker.Item label="Northern" value="northern"/>
+            <Picker.Item label="Southern" value="southern"/>
+            <Picker.Item label="Western" value="western"/>
+          </Picker>
 
 
-        <View style={styles.titleContainer}>
-            <Text style={styles.titleText}>Hostel</Text>
-        </View>
-        <Picker
-          style={styles.picker}
-          selectedValue= {this.state.hostel}
-          onValueChange={(itemValue, itemIndex) => this.setState({hostel: itemValue})}>
-          <Picker.Item label="" value=""/>
-          <Picker.Item label="Option 1" value="1" />
-          <Picker.Item label="Option 2" value="2" />
-          <Picker.Item label="Option 3" value="3" />
-        </Picker>
+          <View style={styles.titleContainer}>
+              <Text style={styles.titleText}>Hostel</Text>
+          </View>
+          <Picker
+            style={styles.picker}
+            selectedValue= {this.state.hostel}
+            onValueChange={(itemValue, itemIndex) => this.setState({hostel: itemValue})}>
+            <Picker.Item label="" value=""/>
+            <Picker.Item label="Option 1" value="1" />
+            <Picker.Item label="Option 2" value="2" />
+            <Picker.Item label="Option 3" value="3" />
+          </Picker>
 
-        <Text style={styles.note}>{this.state.note}{'\n'}{'\n'}</Text>
+          <Text style={styles.note}>{this.state.note}{'\n'}{'\n'}</Text>
 
-        <TouchableOpacity style={styles.button} onPress={()=> this.onStart()}>
-            <Text style={styles.buttonText}>Get Started!</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={()=> this.onStart()}>
+              <Text style={styles.buttonText}>Get Started!</Text>
+          </TouchableOpacity>
+        </ScrollView>
       </View>
     );
   }

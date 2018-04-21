@@ -9,8 +9,10 @@ import {
   TouchableOpacity,
   Text,
   TextInput,
+  Button,
   Platform,
-  StyleSheet
+  StyleSheet,
+  WebView
 } from 'react-native';
 
 const scopes = ['openid', 'profile', 'email', 'offline_access'];
@@ -61,9 +63,7 @@ revoke = async () => {
   }
 };
 
-const Register = () => {
 
-}
 
 
 type Props = {};
@@ -74,14 +74,20 @@ class Login extends Component<Props> {
       hasLoggedInOnce: false,
       accessToken: '',
       accessTokenExpirationDate: '',
-      refreshToken: ''
-    };
+      refreshToken: '',
+      openWebView: false,
+    }
   }
 
   onLogin() {
     // temporary, for testing only
     this.props.navigation.navigate('Demographics');
     this.authorize
+  }
+
+  printLog() {
+    console.log("webview open");
+    return true;
   }
 
   onSignup() {

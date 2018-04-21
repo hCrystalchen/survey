@@ -9,7 +9,8 @@ import {
   View,
   Switch,
   TouchableOpacity,
-  AppState
+  AppState,
+  AsynStorage
 } from 'react-native';
 
 
@@ -24,18 +25,48 @@ type Props = {};
 export default class Settings extends Component<Props> {
   constructor() {
     super();
+    this._scheduleNotification = this._scheduleNotification.bind(this);
     this.state = {
       notify: true
     };
   }
+
+    // Schedules weekly notifications if user turns switch on or cancel all notifications if the user turns switch off
+    _scheduleNotification = async() => {
+      try{
+          const value = await AsyncStorage.getItem('Notify');
+          if(value !== null) {
+              if (value) {
+                  PushNotification.localNotificationSchedule({
+                      message: "Reminder to take survey", // (required)
+                      repeatType: 'week', // (Android only) Repeating interval. Could be one of `week`, `day`, `hour`, `minute, `time`.
+                      date: new Date(Date.now() + (604800 * 1000)) // in 60 secs
+                  });
+              } else {
+                  PushNotification.cancelAllLocalNotifications();
+              }
+          }
+      } catch(error) {
+          console.log(error)
+      }
+    }
+
   // Handles onPress of logout button
   onLogout() {
-    // temporary?
+    // temporary
+    // TODO: log user out and make sure back button wouldn't bring user back to settings page
     this.props.navigation.navigate('Login');
   }
 
-  onChangedNotificationSettings(val){
+  // handles on/off switch for notifications
+  async onChangedNotificationSettings(val){
     this.setState({notify: val});
+    try {
+        await AsyncStorage.setItem('Notify', val);
+    } catch(error) {
+        console.log(error);
+    }
+    this._scheduleNotification();
   }
 
   render() {

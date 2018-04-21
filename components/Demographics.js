@@ -60,12 +60,21 @@ export default class Demographics extends Component<Props> {
 
   // Handles onPress of start button: check if all fields are filled out and create contact on Qualtrics
   onStart() {
-//    if (this.state.age == '' || this.state.married == '' || this.state.language == '' || this.state.home == '' || this.state.hostel == '') {
-//        alert('Please fill out all fields before proceeding');
-//    } else {
+    if (this.state.age == '' || this.state.married == '' || this.state.language == '' || this.state.home == '' || this.state.hostel == '') {
+        alert('Please fill out all fields before proceeding');
+    } else {
         // send demographics info as fields of contact to Qualtrics and create new contact
+    fetch("https://brown.co1.qualtrics.com/API/v3/users", {
+      body: "{\"username\": \"\",    \"username\": \"exampleuser@example.com\", \"firstName\": \"ExampleFirstName\", \"lastName\": \"ExampleLastName\", \"userType\": \"UT_012345678912345\", \"email\": \"exampleuser@example.com\", \"password\": \"examplepassword\", \"language\":" + this.language + ", \"embeddedData\": {\"age\": " + this.age + ", \"married\": " + this.married + ", \"home\": " + this.home + ", \"hostel\": " + this.hostel + "}}",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Api-Token": "sN3CcMFLMaxNBeTONpasNx68GqxO3Yi9dpax79si"
+      },
+      method: "POST"
+    });
+        // navigate to Dashboard
         this.props.navigation.navigate('Dash');
-//    }
+    }
   }
   render() {
     return (

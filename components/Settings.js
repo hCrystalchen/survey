@@ -8,7 +8,8 @@ import {
   NavigatorIOS,
   View,
   Switch,
-  TouchableOpacity
+  TouchableOpacity,
+  AppState
 } from 'react-native';
 
 
@@ -24,22 +25,17 @@ export default class Settings extends Component<Props> {
   constructor() {
     super();
     this.state = {
-      notify: true,
-      theme: true
+      notify: true
     };
   }
   // Handles onPress of logout button
   onLogout() {
-    // temporary
+    // temporary?
     this.props.navigation.navigate('Login');
   }
 
   onChangedNotificationSettings(val){
     this.setState({notify: val});
-  }
-
-  onChangedThemeSettings(val){
-    this.setState({theme: val});
   }
 
   render() {
@@ -53,15 +49,6 @@ export default class Settings extends Component<Props> {
               <Switch
               value={this.state.notify}
               onValueChange={(val) => this.onChangedNotificationSettings(val)}/>
-            </View>
-            <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>Theme Settings</Text>
-            </View>
-            <View style={styles.container}>
-              <Text>Light Theme</Text>
-              <Switch
-              value={this.state.theme}
-              onValueChange={(val) => this.onChangedThemeSettings(val)}/>
             </View>
             <View style={styles.container}>
               <TouchableOpacity style={styles.button} onPress={()=> this.onLogout()}>

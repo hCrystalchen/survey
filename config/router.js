@@ -8,6 +8,7 @@ import Register from 'survey/components/Register';
 import Dashboard from 'survey/components/Dashboard';
 import InAppSurvey from 'survey/components/InAppSurvey';
 
+import GLOBALS from '../components/Globals.js';
 
 // This file contains all of the routes/screen configurations for our app.
 export const Root = StackNavigator({
@@ -33,11 +34,26 @@ export const Root = StackNavigator({
     screen: Demographics,
   },
 
-  Dashboard: {
-    screen: Dashboard,
-    navigationOptions: {
-      title: 'Demographics',
+  Dash: {
+    screen: TabNavigator({
+        Dashboard: {screen: Dashboard},
+        Settings: {screen: Settings},
     },
+      {
+        tabBarOptions: {
+          activeTintColor: GLOBALS.STYLES.TITLETEXT,
+          inactiveTintColor: GLOBALS.COLOR.TRANSPARENTWHITE,
+          indicatorStyle: {
+            backgroundColor: GLOBALS.COLOR.LIGHTBLUE
+          },
+          style: {
+            backgroundColor: GLOBALS.COLOR.BLUE
+          }
+        },
+        tabBarPosition: 'bottom',
+        animationEnabled: true,
+        swipeEnabled: true,
+      }),
   },
 
   InAppSurvey: {
@@ -46,8 +62,13 @@ export const Root = StackNavigator({
       title: 'Survey of the Week',
     },
   }
+}, {
+    headerMode:'none',
+    navigationOptions: {
+        headerVisible: false,
+    }
 });
-// }, 
+// },
 // {
 //   mode: 'modal',
 //   headerMode: 'none',

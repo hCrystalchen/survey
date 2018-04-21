@@ -114,7 +114,7 @@ export default class Register extends Component<Props> {
             width='80%'
             style={styles.input}
             placeholder="First Name"
-            keyboardType='string'
+            keyboardType='default'
           />
           <TextInput
             type="TextInput"
@@ -122,7 +122,7 @@ export default class Register extends Component<Props> {
             width='80%'
             style={styles.input}
             placeholder="Last Name"
-            keyboardType='string'
+            keyboardType='default'
           />
           <TextInput
             type="TextInput"

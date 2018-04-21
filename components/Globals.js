@@ -24,4 +24,5 @@ export default {
     TITLE: 20,
     NOTE: 14
   }
+
 };

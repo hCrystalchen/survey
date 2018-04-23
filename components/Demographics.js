@@ -9,7 +9,8 @@ import {
   TextInput,
   Button,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 
 const instructions = Platform.select({
@@ -23,20 +24,25 @@ type Props = {};
 export default class Demographics extends Component<Props> {
   constructor() {
     super();
+    this.createContact = this.createContact.bind(this);
+    this.onStart = this.onStart.bind(this);
+    this.deleteContact = this.deleteContact.bind(this);
+    this.setID = this.setID.bind(this);
     this.state = {
-      note: "The information you have provided will be used for research purpose only and will not be shared.",
-      prompt: 'A little bit about yourself...',
       age:'',
-      married:'',
+      maritalStatus:'',
       language:'',
-      home:'',
+      homeProvince:'',
       hostel:''
     };
+    this.note = "The information you have provided will be used for research purpose only and will not be shared.";
+    this.prompt = 'A little bit about yourself...';
   }
 
   static navigationOptions = {
     title: 'Demographics',
   }
+
   // Ensures that only number input can be entered in the age field
   onAgeChanged(text){
       let replacement = '';
@@ -58,29 +64,69 @@ export default class Demographics extends Component<Props> {
       this.setState({ age: replacement});
   }
 
+  // Stores userID of current user, if id not null but tries to submit demographic questions again,
+  // remove previous contact and create new contact with the updated info
+  async setID(data) {
+    var id = data.result.id;
+    try {
+        const value = await AsyncStorage.getItem('UserID', (error, result) => {
+            if (result !== null) {
+                  this.deleteContact(result);
+            }
+        });
+        await AsyncStorage.setItem('UserID', id);
+    } catch(error) {
+        console.log("Error setting id data" + error.message);
+    }
+  }
+
+  // Remove contact by id (using Qualtrics' API)
+  deleteContact(id) {
+    let url = "https://brown.co1.qualtrics.com/API/v3/mailinglists/ML_2ujejm2mcElgSkB/contacts/" + id;
+    fetch(url, {
+        method: "DELETE",
+        headers: {
+            "X-Api-Token": "QdrsdTFfn7YgW7pIs5qAs4M4O4cN4hzDwM0h8FeL"
+        }
+    }).catch(function(error) {
+        console.log('There has been a problem with your fetch(delete contact) operation:' + error.message);
+    });
+  }
+
   // Handles onPress of start button: check if all fields are filled out and create contact on Qualtrics
   onStart() {
-    if (this.state.age == '' || this.state.married == '' || this.state.language == '' || this.state.home == '' || this.state.hostel == '') {
+    if (this.state.age == '' || this.state.maritalStatus == '' || this.state.language == '' || this.state.homeProvince == '' || this.state.hostel == '') {
         alert('Please fill out all fields before proceeding');
     } else {
-        // send demographics info as fields of contact to Qualtrics and create new contact
-    fetch("https://brown.co1.qualtrics.com/API/v3/users", {
-      body: "{\"username\": \"\",    \"username\": \"exampleuser@example.com\", \"firstName\": \"ExampleFirstName\", \"lastName\": \"ExampleLastName\", \"userType\": \"UT_012345678912345\", \"email\": \"exampleuser@example.com\", \"password\": \"examplepassword\", \"language\":" + this.language + ", \"embeddedData\": {\"age\": " + this.age + ", \"married\": " + this.married + ", \"home\": " + this.home + ", \"hostel\": " + this.hostel + "}}",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Api-Token": "sN3CcMFLMaxNBeTONpasNx68GqxO3Yi9dpax79si"
-      },
-      method: "POST"
-    });
+        this.createContact();
         // navigate to Dashboard
         this.props.navigation.navigate('Dash');
     }
   }
+
+  // Create contact with appropriate demographics info on Qualtrics
+  createContact() {
+    // send demographics info as fields of contact to Qualtrics and create new contact
+    let data = JSON.stringify({embeddedData: this.state});
+    // temporarily hardcoded token, should secure in final product
+    fetch("https://brown.co1.qualtrics.com/API/v3/mailinglists/ML_2ujejm2mcElgSkB/contacts", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Api-Token": "QdrsdTFfn7YgW7pIs5qAs4M4O4cN4hzDwM0h8FeL"
+        },
+        body: data
+    }).then(function(response) {
+        return response.json();
+    }).then((data) => this.setID(data)).catch(function(error) {
+        console.log('There has been a problem with your fetch(create contact) operation: ' + error.message);
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView>
-          <Text style={styles.pageTitle}>{this.state.prompt}{'\n'}{'\n'}</Text>
+          <Text style={styles.pageTitle}>{this.prompt}{'\n'}{'\n'}</Text>
 
           <View style={styles.titleContainer}>
               <Text style={styles.titleText}>Age</Text>
@@ -97,11 +143,11 @@ export default class Demographics extends Component<Props> {
           </View>
           <Picker
             style={styles.picker}
-            selectedValue= {this.state.married}
-            onValueChange={(itemValue, itemIndex) => this.setState({married: itemValue})}>
+            selectedValue= {this.state.maritalStatus}
+            onValueChange={(itemValue, itemIndex) => this.setState({maritalStatus: itemValue})}>
             <Picker.Item label="" value=""/>
             <Picker.Item label="Married" value="married" />
-            <Picker.Item label="Not married, but in relationship" value="relationship" />
+            <Picker.Item label="Not married, but in relationship" value="in relationship" />
             <Picker.Item label="Single" value="single" />
           </Picker>
 
@@ -124,8 +170,8 @@ export default class Demographics extends Component<Props> {
           </View>
           <Picker
             style={styles.picker}
-            selectedValue= {this.state.home}
-            onValueChange={(itemValue, itemIndex) => this.setState({home: itemValue})}>
+            selectedValue= {this.state.homeProvince}
+            onValueChange={(itemValue, itemIndex) => this.setState({homeProvince: itemValue})}>
             <Picker.Item label="" value=""/>
             <Picker.Item label="Central" value="central" />
             <Picker.Item label="Copperbelt" value="copperbelt" />
@@ -153,12 +199,11 @@ export default class Demographics extends Component<Props> {
             <Picker.Item label="Option 3" value="3" />
           </Picker>
 
-          <Text style={styles.note}>{this.state.note}{'\n'}{'\n'}</Text>
+          <Text style={styles.note}>{this.note}{'\n'}{'\n'}</Text>
 
           <TouchableOpacity style={styles.button} onPress={()=> this.onStart()}>
               <Text style={styles.buttonText}>Get Started!</Text>
           </TouchableOpacity>
-        </ScrollView>
       </View>
     );
   }

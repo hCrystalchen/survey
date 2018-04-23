@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import GLOBALS from './Globals.js';
+import PushNotification from 'react-native-push-notification';
+import {scheduleNotification} from './Helpers.js';
 
 import {
   Platform,
@@ -10,7 +12,7 @@ import {
   Switch,
   TouchableOpacity,
   AppState,
-  AsynStorage
+  AsyncStorage
 } from 'react-native';
 
 
@@ -25,36 +27,32 @@ type Props = {};
 export default class Settings extends Component<Props> {
   constructor() {
     super();
-    this._scheduleNotification = this._scheduleNotification.bind(this);
+    this.getNotificationsSettings = this.getNotificationsSettings.bind(this);
     this.state = {
       notify: true
     };
+    this.getNotificationsSettings();
   }
 
-    // Schedules weekly notifications if user turns switch on or cancel all notifications if the user turns switch off
-    _scheduleNotification = async() => {
-      try{
-          const value = await AsyncStorage.getItem('Notify');
-          if(value !== null) {
-              if (value) {
-                  PushNotification.localNotificationSchedule({
-                      message: "Reminder to take survey", // (required)
-                      repeatType: 'week', // (Android only) Repeating interval. Could be one of `week`, `day`, `hour`, `minute, `time`.
-                      date: new Date(Date.now() + (604800 * 1000)) // in 60 secs
-                  });
-              } else {
-                  PushNotification.cancelAllLocalNotifications();
-              }
-          }
-      } catch(error) {
-          console.log(error)
-      }
+  // Get Notify value from AsyncStorage to set value of switch appropriately (persistence)
+  async getNotificationsSettings() {
+    try {
+        const value = await AsyncStorage.getItem('Notify');
+        if (value === 'true') {
+            this.setState({notify: true});
+        } else {
+            this.setState({notify: false});
+        }
+    } catch(error) {
+        console.log(error);
     }
+  }
 
   // Handles onPress of logout button
-  onLogout() {
+  async onLogout() {
     // temporary
     // TODO: log user out and make sure back button wouldn't bring user back to settings page
+    await AsyncStorage.removeItem('UserID');
     this.props.navigation.navigate('Login');
   }
 
@@ -62,11 +60,10 @@ export default class Settings extends Component<Props> {
   async onChangedNotificationSettings(val){
     this.setState({notify: val});
     try {
-        await AsyncStorage.setItem('Notify', val);
+        await AsyncStorage.setItem('Notify', val.toString(), scheduleNotification);
     } catch(error) {
         console.log(error);
     }
-    this._scheduleNotification();
   }
 
   render() {

@@ -129,7 +129,7 @@ export default class Demographics extends Component<Props> {
       <View style={styles.container}>
           <Text style={styles.pageTitle}>{this.prompt}</Text>
 
-          <Title color="#91C0E2" title="Age"/>
+          <Title color={GLOBALS.COLOR.SCHEME[0]} title="Age"/>
           <TextInput
             style={styles.textInput}
             keyboardType='numeric'
@@ -138,7 +138,7 @@ export default class Demographics extends Component<Props> {
             maxLength={2}
           />
 
-          <Title color='#CFBAE1' title="Marital Status"/>
+          <Title color={GLOBALS.COLOR.SCHEME[1]} title="Marital Status"/>
           <Picker
             style={styles.picker}
             selectedValue= {this.state.maritalStatus}
@@ -149,7 +149,7 @@ export default class Demographics extends Component<Props> {
             <Picker.Item label="Single" value="single" />
           </Picker>
 
-          <Title color='#C59FC9' title="Native Language"/>
+          <Title color={GLOBALS.COLOR.SCHEME[2]} title="Native Language"/>
           <Picker
             style={styles.picker}
             selectedValue= {this.state.language}
@@ -161,7 +161,7 @@ export default class Demographics extends Component<Props> {
             <Picker.Item label="Other" value="other"/>
           </Picker>
 
-          <Title color='#96CAE3' title="Home Province"/>
+          <Title color={GLOBALS.COLOR.SCHEME[3]} title="Home Province"/>
           <Picker
             style={styles.picker}
             selectedValue= {this.state.homeProvince}
@@ -179,7 +179,7 @@ export default class Demographics extends Component<Props> {
             <Picker.Item label="Western" value="western"/>
           </Picker>
 
-          <Title color='#83BBEF' title="Hostel"/>
+          <Title color={GLOBALS.COLOR.SCHEME[4]} title="Hostel"/>
           <Picker
             style={styles.picker}
             selectedValue= {this.state.hostel}

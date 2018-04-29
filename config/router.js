@@ -49,7 +49,7 @@ export const Root = StackNavigator({
           showIcon: true,
           showLabel: false,
           style: {
-            backgroundColor: '#78A9D6'
+            backgroundColor: GLOBALS.COLOR.TAB
 
           },
 

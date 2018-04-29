@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     width: GLOBALS.STYLES.WIDTH,
     borderRadius: GLOBALS.STYLES.CORNER,
-    backgroundColor: '#C59FC9',
+    backgroundColor: GLOBALS.COLOR.SCHEME[2],
   },
   titleText: {
     textAlign: 'center',
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width:'100%',
-    backgroundColor: '#91C0E2',
+    backgroundColor: GLOBALS.COLOR.SCHEME[0],
     padding: 10,
     borderRadius: GLOBALS.STYLES.CORNER,
     elevation: 3,

@@ -22,7 +22,9 @@ export default {
     TEXT: 'grey',
     LIGHTTEXT: '#b3b3b3',
     LIGHTTAN: '#FFE38C',
-    TITLETEXT: 'white'
+    TITLETEXT: 'white',
+    TAB: '#78A9D6',
+    SCHEME: ['#91C0E2', '#CFBAE1','#C59FC9','#96CAE3','#83BBEF']
   },
   STYLES: {
     CORNER: 15,

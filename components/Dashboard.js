@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import GLOBALS from './Globals.js';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Progress from './Progress.js';
 
 import {
   Platform,
@@ -8,7 +10,8 @@ import {
   NavigatorIOS,
   View,
   Switch,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native';
 
 
@@ -21,6 +24,12 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class Settings extends Component<Props> {
+  static navigationOptions = {
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="user" color={tintColor} size={26}/>
+    ),
+  };
+
   constructor() {
     super();
     this.state = {
@@ -34,10 +43,11 @@ export default class Settings extends Component<Props> {
   render() {
     return (
       <View style={styles.page}>
-            <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>DASHBOARD GOES HERE</Text>
-            </View>
+            <Progress points={47}/>
             <View style={styles.container}>
+              <TouchableOpacity style={styles.button} onPress={()=> this.onTakeSurvey()}>
+                  <Text style={styles.buttonText}>Take Survey</Text>
+              </TouchableOpacity>
               <TouchableOpacity style={styles.button} onPress={()=> this.onTakeSurvey()}>
                   <Text style={styles.buttonText}>Take Survey</Text>
               </TouchableOpacity>

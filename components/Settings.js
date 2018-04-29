@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GLOBALS from './Globals.js';
 import PushNotification from 'react-native-push-notification';
 import {scheduleNotification} from './Helpers.js';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
   Platform,
@@ -25,6 +26,12 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class Settings extends Component<Props> {
+  static navigationOptions = {
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="gear" color={tintColor} size={26}/>
+    ),
+  };
+
   constructor() {
     super();
     this.getNotificationsSettings = this.getNotificationsSettings.bind(this);
@@ -73,7 +80,7 @@ export default class Settings extends Component<Props> {
                 <Text style={styles.titleText}>Notification Settings</Text>
             </View>
             <View style={styles.container}>
-              <Text>Weekly Reminders</Text>
+              <Text style={{color: GLOBALS.COLOR.TEXT}}>Weekly Reminders</Text>
               <Switch
               value={this.state.notify}
               onValueChange={(val) => this.onChangedNotificationSettings(val)}/>
@@ -91,17 +98,18 @@ export default class Settings extends Component<Props> {
 const styles = StyleSheet.create({
   titleContainer: {
     width: GLOBALS.STYLES.WIDTH,
-    backgroundColor: GLOBALS.COLOR.BLUE,
+    borderRadius: GLOBALS.STYLES.CORNER,
+    backgroundColor: '#C59FC9',
   },
   titleText: {
-    textAlign: 'left',
+    textAlign: 'center',
     fontSize: GLOBALS.FONTSIZE.TEXT,
     padding: 10,
     color: GLOBALS.COLOR.TITLETEXT
   },
   button: {
     width:'100%',
-    backgroundColor: GLOBALS.COLOR.BLUE,
+    backgroundColor: '#91C0E2',
     padding: 10,
     borderRadius: GLOBALS.STYLES.CORNER,
     elevation: 3,

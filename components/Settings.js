@@ -86,7 +86,7 @@ export default class Settings extends Component<Props> {
               value={this.state.notify}
               onValueChange={(val) => this.onChangedNotificationSettings(val)}/>
             </View>
-            <AnimatableButton text="Logout" color={GLOBALS.COLOR.TITLETEXT} background={GLOBALS.COLOR.BLUE} onPress={()=> this.onLogout()}/>
+            <AnimatableButton text="Logout" color={GLOBALS.COLOR.TITLETEXT} background={GLOBALS.COLOR.SCHEME[0]} onPress={()=> this.onLogout()}/>
       </View>
     );
   }

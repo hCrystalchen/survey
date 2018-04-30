@@ -29,6 +29,8 @@ export default {
   STYLES: {
     CORNER: 15,
     YMARGIN: 10,
+    BUTTONWIDTH: '50%',
+    BUTTONHEIGHT: 50,
     WIDTH: '90%',
     FULL: '100%'
   },

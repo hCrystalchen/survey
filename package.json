@@ -6,6 +6,7 @@
   "dependencies": {
     "react": "^16.3.2",
     "react-native": "^0.55.3",
+    "react-native-animatable": "^1.2.4",
     "react-native-app-auth": "^2.4.1",
     "react-native-circular-progress": "^0.2.0",
     "react-native-form": "^2.1.2",

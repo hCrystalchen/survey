@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GLOBALS from 'survey/components/Globals.js';
 import { authorize } from 'react-native-app-auth';
 import { Page, Button, ButtonContainer, Form, Heading } from '../components';
+import AnimatableButton from './AnimatableButton.js';
 
 import {
   StackNavigator,
@@ -167,9 +168,9 @@ export default class App extends Component<{}, State> {
 
     <ButtonContainer>
     {!state.accessToken && (
-            <Button onPress={this.authorize} text="Log In" color="#5a96ce" />
+            <AnimatableButton text="Log In" color={GLOBALS.COLOR.TITLETEXT} background={GLOBALS.COLOR.BLUE} onPress={this.authorize}/>
           )}
-    <Button onPress={()=> this.onSignup()} text="Sign Up" color="#5a96ce" />
+    <AnimatableButton text="Sign Up" color={GLOBALS.COLOR.TITLETEXT} background={GLOBALS.COLOR.BLUE} onPress={()=> this.onSignup()}/>
 
       
     </ButtonContainer>

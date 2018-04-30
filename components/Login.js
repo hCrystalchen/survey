@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Demographics from "survey/components/Demographics.js";
-import Settings from "survey/components/Settings.js";
 import GLOBALS from 'survey/components/Globals.js';
+import AnimatableButton from './AnimatableButton.js';
 
 import {
   StackNavigator,
@@ -9,7 +8,6 @@ import {
   TouchableOpacity,
   Text,
   TextInput,
-  Button,
   Platform,
   StyleSheet,
   WebView,
@@ -94,6 +92,7 @@ class Login extends Component<Props> {
   onSignup() {
     this.props.navigation.navigate('Register');
   }
+
   render() {
     const { accessToken, accessTokenExpirationDate} = this.state;
     const { container, createAccount } = styles;
@@ -121,9 +120,7 @@ class Login extends Component<Props> {
               placeholderTextColor = {GLOBALS.COLOR.LIGHTTEXT}
               ref={(input) => this.password = input}
               />
-        <TouchableOpacity style={styles.button} onPress={()=> this.onLogin()}>
-            <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
+        <AnimatableButton text="Login" background = {GLOBALS.COLOR.BLUE} color = {GLOBALS.COLOR.TITLETEXT} onPress = {() => this.onLogin()} />
 		<View style={styles.textContainer}>
 			<Text style={styles.text}>Do not have an account?</Text>
 			<TouchableOpacity onPress={()=> this.onSignup()}>
@@ -141,19 +138,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: GLOBALS.COLOR.LIGHTBLUE,
     alignItems: 'center',
-  },
-  button: {
-    width: GLOBALS.STYLES.WIDTH,
-    backgroundColor: GLOBALS.COLOR.BLUE,
-    padding: 10,
-    borderRadius: GLOBALS.STYLES.CORNER,
-    elevation: 3,
-    marginVertical: GLOBALS.STYLES.YMARGIN
-  },
-  buttonText: {
-    textAlign: 'center',
-    color: GLOBALS.COLOR.TITLETEXT,
-    fontSize: GLOBALS.FONTSIZE.BUTTON
   },
   input: {
     width: GLOBALS.STYLES.WIDTH,

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Demographics from "survey/components/Demographics.js";
 import Settings from "survey/components/Settings.js";
 import GLOBALS from 'survey/components/Globals.js';
+import { authorize } from 'react-native-app-auth';
+import { Page, Button, ButtonContainer, Form, Heading } from '../components';
 
 import {
   StackNavigator,
@@ -9,14 +11,18 @@ import {
   TouchableOpacity,
   Text,
   TextInput,
-  Button,
   Platform,
   StyleSheet,
   WebView,
-  Image
+  Image,
+  Alert,
+  UIManager, 
+  LayoutAnimation
 } from 'react-native';
 
-const scopes = ['openid', 'profile', 'email', 'offline_access'];
+UIManager.setLayoutAnimationEnabledExperimental &&
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+
 
 type State = {
   hasLoggedInOnce: boolean,
@@ -29,111 +35,8 @@ const config = {
   issuer: 'https://dev-764524.oktapreview.com/oauth2/default',
   clientId: '0oaep21929h1GUvKC0h7',
   redirectUrl: 'com.oktapreview.dev-764524:/callback',
-  additionalParameters: {},
   scopes: ['openid', 'profile', 'email', 'offline_access']
 };
-
-authorize = async () => {
-  try {
-    const authState = await authorize(config);
-
-  } catch (error) {
-    Alert.alert('Failed to log in', error.message);
-  }
-};
-
-refresh = async () => {
-  try {
-    const authState = await refresh(config, {
-      refreshToken: this.state.refreshToken
-    });
-
-  } catch (error) {
-    Alert.alert('Failed to refresh token', error.message);
-  }
-};
-
-revoke = async () => {
-  try {
-    await revoke(config, {
-      tokenToRevoke: this.state.accessToken,
-      sendClientId: true
-    });
-  } catch (error) {
-    Alert.alert('Failed to revoke token', error.message);
-  }
-};
-
-
-
-
-type Props = {};
-class Login extends Component<Props> {
-  constructor() {
-    super();
-    this.state = {
-      hasLoggedInOnce: false,
-      accessToken: '',
-      accessTokenExpirationDate: '',
-      refreshToken: '',
-      openWebView: false,
-    }
-  }
-
-  onLogin() {
-    // temporary, for testing only
-    this.props.navigation.navigate('Demographics');
-    this.authorize
-  }
-
-  printLog() {
-    console.log("webview open");
-    return true;
-  }
-
-  onSignup() {
-    this.props.navigation.navigate('Register');
-  }
-  render() {
-    const { accessToken, accessTokenExpirationDate} = this.state;
-    const { container, createAccount } = styles;
-
-    return (
-      <View style={styles.container}>
-          <View style={{height: '50%'}}>
-          <Image
-            source={require('../assets/logo.png')}
-            style={{width: 375, height: 375, }}
-          />
-          </View>
-          <TextInput style={styles.input}
-              underlineColorAndroid='rgba(0,0,0,0)'
-              placeholder="Username"
-              placeholderTextColor = {GLOBALS.COLOR.LIGHTTEXT}
-              selectionColor="#ffffff"
-              keyboardType="default"
-              onSubmitEditing={()=> this.password.focus()}
-              />
-          <TextInput style={styles.input}
-              underlineColorAndroid='rgba(0,0,0,0)'
-              placeholder="Password"
-              secureTextEntry={true}
-              placeholderTextColor = {GLOBALS.COLOR.LIGHTTEXT}
-              ref={(input) => this.password = input}
-              />
-        <TouchableOpacity style={styles.button} onPress={()=> this.onLogin()}>
-            <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-		<View style={styles.textContainer}>
-			<Text style={styles.text}>Do not have an account?</Text>
-			<TouchableOpacity onPress={()=> this.onSignup()}>
-			    <Text style={styles.textButton}> Sign up</Text>
-		    </TouchableOpacity>
-		</View>
-        </View>
-    );
-  }
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -182,4 +85,114 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Login;
+
+export default class App extends Component<{}, State> {
+  state = {
+    hasLoggedInOnce: false,
+    accessToken: '',
+    accessTokenExpirationDate: '',
+    refreshToken: ''
+  };
+
+  animateState(nextState: $Shape<State>, delay: number = 0) {
+    setTimeout(() => {
+      this.setState(() => {
+        LayoutAnimation.easeInEaseOut();
+        return nextState;
+      });
+    }, delay);
+  }
+
+  authorize = async () => {
+    try {
+      const authState = await authorize(config);
+
+      this.animateState(
+        {
+          hasLoggedInOnce: false,
+          accessToken: authState.accessToken,
+          accessTokenExpirationDate: authState.accessTokenExpirationDate,
+          refreshToken: authState.refreshToken
+        },
+        500
+      );
+      this.props.navigation.navigate('Demographics');
+
+    } catch (error) {
+      Alert.alert('Failed to log in', error.message);
+    }
+  };
+
+  refresh = async () => {
+    try {
+      const authState = await refresh(config, {
+        refreshToken: this.state.refreshToken
+      });
+
+      this.animateState({
+        accessToken: authState.accessToken || this.state.accessToken,
+        accessTokenExpirationDate:
+          authState.accessTokenExpirationDate || this.state.accessTokenExpirationDate,
+        refreshToken: authState.refreshToken || this.state.refreshToken
+      });
+    } catch (error) {
+      Alert.alert('Failed to refresh token', error.message);
+    }
+  };
+
+  revoke = async () => {
+    try {
+      await revoke(config, {
+        tokenToRevoke: this.state.accessToken,
+        sendClientId: true
+      });
+      this.animateState({
+        accessToken: '',
+        accessTokenExpirationDate: '',
+        refreshToken: ''
+      });
+    } catch (error) {
+      Alert.alert('Failed to revoke token', error.message);
+    }
+  };
+
+  onSignup() {
+    this.props.navigation.navigate('Register');
+  }
+
+  render() {
+    const { state } = this;
+    return (
+      <Page>
+        {!!state.accessToken ? (
+          <Form>
+            <Form.Label>accessToken</Form.Label>
+            <Form.Value>{state.accessToken}</Form.Value>
+          </Form>
+        ) : (
+          <Heading><Image
+          source={require('../assets/logo.png')}
+          style={{width: 375, height: 375, }}
+        /></Heading>
+        )}
+
+
+
+
+
+    <ButtonContainer>
+    {!state.accessToken && (
+            <Button onPress={this.authorize} text="Log In" color="#5a96ce" />
+          )}
+    <Button onPress={()=> this.onSignup()} text="Sign Up" color="#5a96ce" />
+
+      
+    </ButtonContainer>
+
+    </Page>
+    );
+  }
+}
+
+
+

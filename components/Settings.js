@@ -95,7 +95,6 @@ export default class Settings extends Component<Props> {
 const styles = StyleSheet.create({
   titleContainer: {
     width: GLOBALS.STYLES.WIDTH,
-    borderRadius: GLOBALS.STYLES.CORNER,
     backgroundColor: GLOBALS.COLOR.SCHEME[2],
   },
   titleText: {
@@ -114,7 +113,6 @@ const styles = StyleSheet.create({
     width: GLOBALS.STYLES.WIDTH,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: GLOBALS.COLOR.LIGHTBLUE,
-    marginTop: '2%'
+    backgroundColor: GLOBALS.COLOR.LIGHTBLUE
   }
 });

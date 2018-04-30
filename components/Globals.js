@@ -27,10 +27,9 @@ export default {
     SCHEME: ['#91C0E2', '#CFBAE1','#C59FC9','#96CAE3','#83BBEF']
   },
   STYLES: {
-    CORNER: 15,
+    CORNER: 35,
     YMARGIN: 10,
     BUTTONWIDTH: '50%',
-    BUTTONHEIGHT: 50,
     WIDTH: '90%',
     FULL: '100%'
   },

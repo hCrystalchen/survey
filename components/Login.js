@@ -157,7 +157,9 @@ export default class App extends Component<{}, State> {
           </Form>
         ) : (
           <Heading><Image
-          source={require('../assets/logo.png')}
+          width = {200}
+          height = {200}
+          source={{uri: 'logo'}}
           style={{width: 375, height: 375, }}
         /></Heading>
         )}

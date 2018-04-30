@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
   },
   button: {
     width: GLOBALS.STYLES.FULL,
-    height: GLOBALS.STYLES.BUTTONHEIGHT,
     padding: 10,
     borderRadius: GLOBALS.STYLES.CORNER,
     elevation: 3

@@ -18,7 +18,7 @@ import {
 
 function Title(props) {
     return (
-        <View style={{width: GLOBALS.STYLES.WIDTH, backgroundColor: props.color, borderRadius: GLOBALS.STYLES.CORNER}}>
+        <View style={{width: GLOBALS.STYLES.WIDTH, backgroundColor: props.color}}>
             <Text style={styles.titleText}>{props.title}</Text>
         </View>
     );
@@ -136,7 +136,7 @@ export default class Demographics extends Component<Props> {
     return (
       <View style={styles.container}>
           <Text style={styles.pageTitle}>{this.prompt}</Text>
-          <Animatable.View ref="age_view" style={styles.item} animation="bounceInDown" duration={1500}>
+          <Animatable.View ref="age_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.SCHEME[0]}]} animation="bounceInDown" duration={1500}>
           <Title color={GLOBALS.COLOR.SCHEME[0]} title="Age"/>
           <TextInput
             style={styles.textInput}
@@ -147,7 +147,7 @@ export default class Demographics extends Component<Props> {
           />
           </Animatable.View>
 
-          <Animatable.View ref="status_view" style={styles.item} animation="bounceInLeft" duration={1500}>
+          <Animatable.View ref="status_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.SCHEME[1]}]} animation="bounceInLeft" duration={1500}>
           <Title color={GLOBALS.COLOR.SCHEME[1]} title="Marital Status"/>
           <Picker
             style={styles.picker}
@@ -160,7 +160,7 @@ export default class Demographics extends Component<Props> {
           </Picker>
           </Animatable.View>
 
-          <Animatable.View ref="language_view" style={styles.item} animation="bounceInRight" duration={1500}>
+          <Animatable.View ref="language_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.SCHEME[2]}]} animation="bounceInRight" duration={1500}>
           <Title color={GLOBALS.COLOR.SCHEME[2]} title="Native Language"/>
           <Picker
             style={styles.picker}
@@ -174,7 +174,7 @@ export default class Demographics extends Component<Props> {
           </Picker>
           </Animatable.View>
 
-          <Animatable.View ref="home_view" style={styles.item} animation="bounceInLeft" duration={1500}>
+          <Animatable.View ref="home_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.SCHEME[3]}]} animation="bounceInLeft" duration={1500}>
           <Title color={GLOBALS.COLOR.SCHEME[3]} title="Home Province"/>
           <Picker
             style={styles.picker}
@@ -194,7 +194,7 @@ export default class Demographics extends Component<Props> {
           </Picker>
           </Animatable.View>
 
-          <Animatable.View ref="hostel_view" style={styles.item} animation="bounceInRight" duration={1500}>
+          <Animatable.View ref="hostel_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.SCHEME[4]}]} animation="bounceInRight" duration={1500}>
           <Title color={GLOBALS.COLOR.SCHEME[4]} title="Hostel"/>
           <Picker
             style={styles.picker}

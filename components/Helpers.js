@@ -4,7 +4,6 @@ import PushNotification from 'react-native-push-notification';
 export async function scheduleNotification() {
   try{
       const value = await AsyncStorage.getItem('Notify');
-      console.log(value);
       if(value !== null) {
           if (value === 'true') {
               PushNotification.localNotificationSchedule({
@@ -33,3 +32,6 @@ export async function setNotify() {
   }
 }
 
+export function animateButton(element, callback) {
+  element.rubberBand(300).then(setTimeout(callback, 300));
+}

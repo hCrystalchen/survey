@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Demographics from "survey/components/Demographics.js";
-import Settings from "survey/components/Settings.js";
 import GLOBALS from 'survey/components/Globals.js';
 import { authorize } from 'react-native-app-auth';
 import { Page, Button, ButtonContainer, Form, Heading } from '../components';
@@ -44,19 +42,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: GLOBALS.COLOR.LIGHTBLUE,
     alignItems: 'center',
-  },
-  button: {
-    width: GLOBALS.STYLES.WIDTH,
-    backgroundColor: GLOBALS.COLOR.BLUE,
-    padding: 10,
-    borderRadius: GLOBALS.STYLES.CORNER,
-    elevation: 3,
-    marginVertical: GLOBALS.STYLES.YMARGIN
-  },
-  buttonText: {
-    textAlign: 'center',
-    color: GLOBALS.COLOR.TITLETEXT,
-    fontSize: GLOBALS.FONTSIZE.BUTTON
   },
   input: {
     width: GLOBALS.STYLES.WIDTH,

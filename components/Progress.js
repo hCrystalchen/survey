@@ -15,18 +15,23 @@ export default class Progress extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      points: this.props.points
+      points: (this.props.points % 5) * 20
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props !== nextProps) {
+        this.setState({points: (nextProps.points % 5) *20});
+    }
+  }
+
   render() {
-    let progress = (this.state.points % 5) * 20;
     return (
       <View style={styles.container}>
         <AnimatedCircularProgress
             size={320}
             width={50}
-            fill={progress}
+            fill={this.state.points}
             tintColor={GLOBALS.COLOR.GREEN}
             rotation={180}
             backgroundColor={GLOBALS.COLOR.PALEBLUE}>

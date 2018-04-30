@@ -3,6 +3,7 @@ import GLOBALS from './Globals.js';
 import PushNotification from 'react-native-push-notification';
 import {scheduleNotification} from './Helpers.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AnimatableButton from './AnimatableButton.js';
 
 import {
   Platform,
@@ -85,11 +86,7 @@ export default class Settings extends Component<Props> {
               value={this.state.notify}
               onValueChange={(val) => this.onChangedNotificationSettings(val)}/>
             </View>
-            <View style={styles.container}>
-              <TouchableOpacity style={styles.button} onPress={()=> this.onLogout()}>
-                  <Text style={styles.buttonText}>Logout</Text>
-              </TouchableOpacity>
-            </View>
+            <AnimatableButton text="Logout" color={GLOBALS.COLOR.TITLETEXT} background={GLOBALS.COLOR.BLUE} onPress={()=> this.onLogout()}/>
       </View>
     );
   }
@@ -106,19 +103,6 @@ const styles = StyleSheet.create({
     fontSize: GLOBALS.FONTSIZE.TEXT,
     padding: 10,
     color: GLOBALS.COLOR.TITLETEXT
-  },
-  button: {
-    width:'100%',
-    backgroundColor: GLOBALS.COLOR.SCHEME[0],
-    padding: 10,
-    borderRadius: GLOBALS.STYLES.CORNER,
-    elevation: 3,
-    marginTop: '30%'
-  },
-  buttonText: {
-    textAlign: 'center',
-    color: GLOBALS.COLOR.TITLETEXT,
-    fontSize: GLOBALS.FONTSIZE.BUTTON
   },
   page: {
     flex: 1,

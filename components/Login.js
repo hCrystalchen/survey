@@ -12,7 +12,8 @@ import {
   Button,
   Platform,
   StyleSheet,
-  WebView
+  WebView,
+  Image
 } from 'react-native';
 
 const scopes = ['openid', 'profile', 'email', 'offline_access'];
@@ -99,11 +100,16 @@ class Login extends Component<Props> {
 
     return (
       <View style={styles.container}>
-          <View style={{height: '45%'}}></View>
+          <View style={{height: '50%'}}>
+          <Image
+            source={require('../assets/logo.png')}
+            style={{width: 375, height: 375, }}
+          />
+          </View>
           <TextInput style={styles.input}
               underlineColorAndroid='rgba(0,0,0,0)'
               placeholder="Username"
-              placeholderTextColor = "#ffffff"
+              placeholderTextColor = {GLOBALS.COLOR.LIGHTTEXT}
               selectionColor="#ffffff"
               keyboardType="default"
               onSubmitEditing={()=> this.password.focus()}
@@ -112,7 +118,7 @@ class Login extends Component<Props> {
               underlineColorAndroid='rgba(0,0,0,0)'
               placeholder="Password"
               secureTextEntry={true}
-              placeholderTextColor = "#ffffff"
+              placeholderTextColor = {GLOBALS.COLOR.LIGHTTEXT}
               ref={(input) => this.password = input}
               />
         <TouchableOpacity style={styles.button} onPress={()=> this.onLogin()}>
@@ -155,7 +161,7 @@ const styles = StyleSheet.create({
     borderRadius: GLOBALS.STYLES.CORNER,
     paddingHorizontal:16,
     fontSize: GLOBALS.FONTSIZE.TEXT,
-    color: GLOBALS.COLOR.TITLETEXT,
+    color: GLOBALS.COLOR.LIGHTTEXT,
     marginVertical: GLOBALS.STYLES.YMARGIN
   },
   textContainer: {

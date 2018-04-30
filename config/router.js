@@ -46,9 +46,13 @@ export const Root = StackNavigator({
           indicatorStyle: {
             backgroundColor: GLOBALS.COLOR.LIGHTBLUE
           },
+          showIcon: true,
+          showLabel: false,
           style: {
-            backgroundColor: GLOBALS.COLOR.BLUE
-          }
+            backgroundColor: GLOBALS.COLOR.TAB
+
+          },
+
         },
         tabBarPosition: 'bottom',
         animationEnabled: true,

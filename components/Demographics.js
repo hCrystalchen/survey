@@ -13,12 +13,13 @@ import {
   AsyncStorage
 } from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+function Title(props) {
+    return (
+        <View style={{width: GLOBALS.STYLES.WIDTH, backgroundColor: props.color, borderRadius: GLOBALS.STYLES.CORNER}}>
+            <Text style={styles.titleText}>{props.title}</Text>
+        </View>
+    );
+}
 
 type Props = {};
 export default class Demographics extends Component<Props> {
@@ -95,13 +96,13 @@ export default class Demographics extends Component<Props> {
 
   // Handles onPress of start button: check if all fields are filled out and create contact on Qualtrics
   onStart() {
-    if (this.state.age == '' || this.state.maritalStatus == '' || this.state.language == '' || this.state.homeProvince == '' || this.state.hostel == '') {
-        alert('Please fill out all fields before proceeding');
-    } else {
-        this.createContact();
+//    if (this.state.age == '' || this.state.maritalStatus == '' || this.state.language == '' || this.state.homeProvince == '' || this.state.hostel == '') {
+//        alert('Please fill out all fields before proceeding');
+//    } else {
+//        this.createContact();
         // navigate to Dashboard
         this.props.navigation.navigate('Dash');
-    }
+//    }
   }
 
   // Create contact with appropriate demographics info on Qualtrics
@@ -126,11 +127,9 @@ export default class Demographics extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-          <Text style={styles.pageTitle}>{this.prompt}{'\n'}{'\n'}</Text>
+          <Text style={styles.pageTitle}>{this.prompt}</Text>
 
-          <View style={styles.titleContainer}>
-              <Text style={styles.titleText}>Age</Text>
-          </View>
+          <Title color={GLOBALS.COLOR.SCHEME[0]} title="Age"/>
           <TextInput
             style={styles.textInput}
             keyboardType='numeric'
@@ -138,9 +137,8 @@ export default class Demographics extends Component<Props> {
             value={this.state.age}
             maxLength={2}
           />
-          <View style={styles.titleContainer}>
-              <Text style={styles.titleText}>Marital Status</Text>
-          </View>
+
+          <Title color={GLOBALS.COLOR.SCHEME[1]} title="Marital Status"/>
           <Picker
             style={styles.picker}
             selectedValue= {this.state.maritalStatus}
@@ -151,9 +149,7 @@ export default class Demographics extends Component<Props> {
             <Picker.Item label="Single" value="single" />
           </Picker>
 
-          <View style={styles.titleContainer}>
-              <Text style={styles.titleText}>Native Language</Text>
-          </View>
+          <Title color={GLOBALS.COLOR.SCHEME[2]} title="Native Language"/>
           <Picker
             style={styles.picker}
             selectedValue= {this.state.language}
@@ -165,9 +161,7 @@ export default class Demographics extends Component<Props> {
             <Picker.Item label="Other" value="other"/>
           </Picker>
 
-          <View style={styles.titleContainer}>
-              <Text style={styles.titleText}>Home Province</Text>
-          </View>
+          <Title color={GLOBALS.COLOR.SCHEME[3]} title="Home Province"/>
           <Picker
             style={styles.picker}
             selectedValue= {this.state.homeProvince}
@@ -185,10 +179,7 @@ export default class Demographics extends Component<Props> {
             <Picker.Item label="Western" value="western"/>
           </Picker>
 
-
-          <View style={styles.titleContainer}>
-              <Text style={styles.titleText}>Hostel</Text>
-          </View>
+          <Title color={GLOBALS.COLOR.SCHEME[4]} title="Hostel"/>
           <Picker
             style={styles.picker}
             selectedValue= {this.state.hostel}
@@ -199,7 +190,7 @@ export default class Demographics extends Component<Props> {
             <Picker.Item label="Option 3" value="3" />
           </Picker>
 
-          <Text style={styles.note}>{this.note}{'\n'}{'\n'}</Text>
+          <Text style={styles.note}>{this.note}{'\n'}</Text>
 
           <TouchableOpacity style={styles.button} onPress={()=> this.onStart()}>
               <Text style={styles.buttonText}>Get Started!</Text>
@@ -213,7 +204,8 @@ const styles = StyleSheet.create({
   pageTitle: {
     textAlign: 'left',
     width: GLOBALS.STYLES.WIDTH,
-    fontSize: GLOBALS.FONTSIZE.TITLE
+    fontSize: GLOBALS.FONTSIZE.TITLE,
+    marginBottom: 10
   },
   note: {
     textAlign: 'left',
@@ -221,7 +213,7 @@ const styles = StyleSheet.create({
     fontSize: GLOBALS.FONTSIZE.NOTE
   },
   button: {
-    width:'80%',
+    width: GLOBALS.STYLES.WIDTH,
     backgroundColor: GLOBALS.COLOR.BLUE,
     padding: 10,
     borderRadius: GLOBALS.STYLES.CORNER,
@@ -234,19 +226,15 @@ const styles = StyleSheet.create({
   },
   textInput: {
     width: GLOBALS.STYLES.WIDTH,
-    textAlign:'center'
+    textAlign:'left'
   },
   picker: {
     height: 50,
     width: GLOBALS.STYLES.WIDTH,
-    justifyContent: 'center'
-  },
-  titleContainer: {
-    width: GLOBALS.STYLES.WIDTH,
-    backgroundColor: GLOBALS.COLOR.BLUE,
+    justifyContent: 'center',
   },
   titleText: {
-    textAlign: 'left',
+    textAlign: 'center',
     fontSize: GLOBALS.FONTSIZE.TEXT,
     padding: 10,
     color: GLOBALS.COLOR.TITLETEXT

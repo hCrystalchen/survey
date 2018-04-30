@@ -1,31 +1,33 @@
 {
   "name": "survey",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
-  },
+  "version": "1.0.0",
+  "description": "Use constants in Globals.js in styling to make redesigning (if necessary) easier",
+  "main": "index.js",
   "dependencies": {
-    "curlrequest": "^1.0.1",
-    "lodash": "^4.17.5",
-    "react": "16.3.1",
-    "react-native": "0.55.2",
-    "react-native-animatable": "^1.2.4",
+    "react": "^16.3.2",
+    "react-native": "^0.55.3",
+    "react-native-app-auth": "^2.4.1",
     "react-native-circular-progress": "^0.2.0",
-    "react-native-elements": "^0.19.1",
     "react-native-form": "^2.1.2",
+    "react-native-notifications": "^1.1.19",
     "react-native-push-notification": "^3.0.2",
     "react-native-vector-icons": "^4.6.0",
-    "react-navigation": "^1.5.11"
+    "react-navigation": "^1.5.11",
+    "styled-components": "^3.2.6"
   },
-  "devDependencies": {
-    "babel-jest": "22.4.3",
-    "babel-preset-react-native": "4.0.0",
-    "jest": "22.4.3",
-    "react-test-renderer": "16.3.1"
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "jest": {
-    "preset": "react-native"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hCrystalchen/survey.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hCrystalchen/survey/issues"
+  },
+  "homepage": "https://github.com/hCrystalchen/survey#readme"
 }

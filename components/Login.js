@@ -182,12 +182,19 @@ export default class App extends Component<{}, State> {
 
     <ButtonContainer>
     {!state.accessToken && (
-            <Button onPress={this.authorize} text="Log In" color="#5a96ce" />
-          )}
-    <Button onPress={()=> this.onSignup()} text="Sign Up" color="#5a96ce" />
-
-      
+      <Button onPress={this.authorize} text="Log In" color="#5a96ce" />
+    )}
     </ButtonContainer>
+
+    {!state.accessToken && (
+      <View style={styles.textContainer}>
+			<Text style={styles.text}>Do not have an account?</Text>
+			<TouchableOpacity onPress={()=> this.onSignup()}>
+			    <Text style={styles.textButton}> Sign up</Text>
+		    </TouchableOpacity>
+		  </View>
+    )}
+    
 
     </Page>
     );

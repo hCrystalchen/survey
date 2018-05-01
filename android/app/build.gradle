@@ -99,12 +99,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-<<<<<<< HEAD
-    compileSdkVersion 23
-    buildToolsVersion '27.0.3'
-=======
     compileSdkVersion 25
->>>>>>> master
 
     defaultConfig {
         applicationId "com.survey"

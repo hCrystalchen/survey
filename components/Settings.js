@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import GLOBALS from './Globals.js';
 import PushNotification from 'react-native-push-notification';
 import {scheduleNotification} from './Helpers.js';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import AnimatableButton from './AnimatableButton.js';
 
 import {
   Platform,
@@ -25,6 +27,12 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class Settings extends Component<Props> {
+  static navigationOptions = {
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="gear" color={tintColor} size={26}/>
+    ),
+  };
+
   constructor() {
     super();
     this.getNotificationsSettings = this.getNotificationsSettings.bind(this);
@@ -73,16 +81,12 @@ export default class Settings extends Component<Props> {
                 <Text style={styles.titleText}>Notification Settings</Text>
             </View>
             <View style={styles.container}>
-              <Text>Weekly Reminders</Text>
+              <Text style={{color: GLOBALS.COLOR.TEXT}}>Weekly Reminders</Text>
               <Switch
               value={this.state.notify}
               onValueChange={(val) => this.onChangedNotificationSettings(val)}/>
             </View>
-            <View style={styles.container}>
-              <TouchableOpacity style={styles.button} onPress={()=> this.onLogout()}>
-                  <Text style={styles.buttonText}>Logout</Text>
-              </TouchableOpacity>
-            </View>
+            <AnimatableButton text="Logout" color={GLOBALS.COLOR.TITLETEXT} background={GLOBALS.COLOR.SCHEME[0]} onPress={()=> this.onLogout()}/>
       </View>
     );
   }
@@ -91,26 +95,13 @@ export default class Settings extends Component<Props> {
 const styles = StyleSheet.create({
   titleContainer: {
     width: GLOBALS.STYLES.WIDTH,
-    backgroundColor: GLOBALS.COLOR.BLUE,
+    backgroundColor: GLOBALS.COLOR.SCHEME[2],
   },
   titleText: {
-    textAlign: 'left',
+    textAlign: 'center',
     fontSize: GLOBALS.FONTSIZE.TEXT,
     padding: 10,
     color: GLOBALS.COLOR.TITLETEXT
-  },
-  button: {
-    width:'100%',
-    backgroundColor: GLOBALS.COLOR.BLUE,
-    padding: 10,
-    borderRadius: GLOBALS.STYLES.CORNER,
-    elevation: 3,
-    marginTop: '30%'
-  },
-  buttonText: {
-    textAlign: 'center',
-    color: GLOBALS.COLOR.TITLETEXT,
-    fontSize: GLOBALS.FONTSIZE.BUTTON
   },
   page: {
     flex: 1,
@@ -122,7 +113,6 @@ const styles = StyleSheet.create({
     width: GLOBALS.STYLES.WIDTH,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: GLOBALS.COLOR.LIGHTBLUE,
-    marginTop: '2%'
+    backgroundColor: GLOBALS.COLOR.LIGHTBLUE
   }
 });

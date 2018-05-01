@@ -76,7 +76,12 @@ project.ext.react = [
     entryFile: "index.js"
 ]
 
+project.ext.vectoricons = [
+        iconFontNames: [ 'MaterialIcons.ttf', 'EvilIcons.ttf', 'FontAwesome.ttf' ] // Name of the font files you want to copy
+]
+
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -94,8 +99,12 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
+<<<<<<< HEAD
     compileSdkVersion 23
     buildToolsVersion '27.0.3'
+=======
+    compileSdkVersion 25
+>>>>>>> master
 
     defaultConfig {
         applicationId "com.survey"
@@ -106,6 +115,9 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        manifestPlaceholders = [
+            appAuthRedirectScheme: 'com.oktapreview.dev-764524'
+        ]
     }
     splits {
         abi {
@@ -137,12 +149,16 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-vector-icons')
-    compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:23.0.1"
-    compile "com.facebook.react:react-native:+"  // From node_modules
-    compile project(':react-native-push-notification')
-    compile ('com.google.android.gms:play-services-gcm:8.1.0') {
+    implementation project(':react-native-vector-icons')
+    implementation project(':react-native-push-notification')
+    implementation project(':react-native-notifications')
+    implementation project(':react-native-app-auth')
+    implementation project(':react-native-vector-icons')
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "com.android.support:appcompat-v7:25.3.1"
+    implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation project(':react-native-push-notification')
+    implementation ('com.google.android.gms:play-services-gcm:8.1.0') {
         force = true;
     }
 }

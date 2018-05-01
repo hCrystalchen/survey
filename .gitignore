@@ -57,3 +57,5 @@ buck-out/
 
 
 .env
+package.json
+ios/survey.xcodeproj/project.pbxproj

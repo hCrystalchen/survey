@@ -96,13 +96,13 @@ export default class Register extends Component<Props> {
   render() {
     return (
       <View style={styles.page}>
-      {this.state.hasRegistered 
+      {this.state.hasRegistered
       ? <View style={styles.registeredText}>
-          <Text>Thanks! Check your email for a link to finish 
+          <Text>Thanks! Check your email for a link to finish
             creating your account! Please click the button below
             to complete the one-time demographic survey.
-            </Text> 
-          <Button 
+            </Text>
+          <Button
             title="Demographic Survey"
             onPress={() => this.props.navigation.navigate('Demographics')}
           />
@@ -132,7 +132,7 @@ export default class Register extends Component<Props> {
             placeholder="Email"
             keyboardType='email-address'
           />
-          <Button 
+          <Button
             title="Submit"
             onPress={() => {
               console.log("pressed submit");
@@ -155,7 +155,7 @@ export default class Register extends Component<Props> {
               style={{marginTop: 20}}
             />
           }
-      </Form>) 
+      </Form>)
       }
       </View>
     );

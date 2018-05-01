@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import GLOBALS from './Globals.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Progress from './Progress.js';
+import AnimatableButton from './AnimatableButton.js';
+
 
 import {
   Platform,
@@ -32,73 +34,59 @@ export default class Settings extends Component<Props> {
 
   constructor() {
     super();
+    this.parseResponseHistory = this.parseResponseHistory.bind(this);
+    this.getResponseHistory = this.getResponseHistory.bind(this);
     this.state = {
+        num_response: 0,
     };
+  }
+
+  componentWillMount() {
+    this.getResponseHistory();
   }
 
   onTakeSurvey(){
     this.props.navigation.navigate('InAppSurvey');
   }
 
+  // Create number of responses of contact on Qualtrics
+  getResponseHistory() {
+    // user for testing, should be actual contact id of the user logged in
+    let user = 'MLRP_06P9eebOcO4kyA5';
+    let mailinglist = 'ML_2ujejm2mcElgSkB';
+    // temporarily hardcoded token, should secure in final product
+    fetch("https://brown.co1.qualtrics.com/API/v3/mailinglists/ML_2ujejm2mcElgSkB/contacts/" + user, {
+        method: "GET",
+        headers: {
+            "X-Api-Token": "QdrsdTFfn7YgW7pIs5qAs4M4O4cN4hzDwM0h8FeL"
+        }
+    }).then(function(response) {
+        return response.json();
+    }).then((data) => this.parseResponseHistory(data)).catch(function(error) {
+        console.log('There has been a problem with your fetch(create contact) operation: ' + error.message);
+    });
+  }
+
+  parseResponseHistory(data) {
+    var responseNum = data.result.responseHistory.length;
+    this.setState({num_response: responseNum});
+  }
+
   render() {
     return (
       <View style={styles.page}>
-            <Progress points={47}/>
-            <View style={styles.container}>
-              <TouchableOpacity style={styles.button} onPress={()=> this.onTakeSurvey()}>
-                  <Text style={styles.buttonText}>Take Survey</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={()=> this.onTakeSurvey()}>
-                  <Text style={styles.buttonText}>Take Survey</Text>
-              </TouchableOpacity>
-            </View>
+            <Progress points={this.state.num_response}/>
+            <AnimatableButton text="Take Survey" color={GLOBALS.COLOR.TITLETEXT} background={GLOBALS.COLOR.BLUE} onPress={()=> this.onTakeSurvey()}/>
 	  </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    width: GLOBALS.STYLES.WIDTH,
-    backgroundColor: GLOBALS.COLOR.BLUE,
-  },
-  titleText: {
-    textAlign: 'left',
-    fontSize: GLOBALS.FONTSIZE.TEXT,
-    padding: 10,
-    color: GLOBALS.COLOR.TITLETEXT
-  },
-  button: {
-    width:'100%',
-    backgroundColor: GLOBALS.COLOR.BLUE,
-    padding: 10,
-    borderRadius: GLOBALS.STYLES.CORNER,
-    elevation: 3,
-    marginTop: '30%'
-  },
-  buttonText: {
-    textAlign: 'center',
-    color: GLOBALS.COLOR.TITLETEXT,
-    fontSize: GLOBALS.FONTSIZE.BUTTON
-  },
   page: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: GLOBALS.COLOR.LIGHTBLUE,
-  },
-  container: {
-    width: GLOBALS.STYLES.WIDTH,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: GLOBALS.COLOR.LIGHTBLUE,
-    marginTop: '2%'
-  },
-  textContainer: {
-  	flexGrow: 1,
-    alignItems:'flex-end',
-    justifyContent:'center',
-    paddingVertical: GLOBALS.FONTSIZE.TEXT,
-    flexDirection:'row'
-  },
+  }
 });

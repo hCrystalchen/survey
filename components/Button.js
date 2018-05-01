@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { Platform } from 'react-native';
 import styled from 'styled-components/native';
+import GLOBALS from 'survey/components/Globals.js';
 
 type Props = {
   text: string,
@@ -21,6 +22,7 @@ const ButtonBox = styled.TouchableOpacity.attrs({ activeOpacity: 0.8 })`
 
 const ButtonText = styled.Text`
   color: white;
+  fontSize: 16px;
 `;
 
 const Button = ({ text, color, onPress }: Props) => (

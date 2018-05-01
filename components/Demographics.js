@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import GLOBALS from './Globals.js';
+import AnimatableButton from './AnimatableButton.js';
+import * as Animatable from 'react-native-animatable';
+
 import {
   Platform,
   StyleSheet,
@@ -15,7 +18,7 @@ import {
 
 function Title(props) {
     return (
-        <View style={{width: GLOBALS.STYLES.WIDTH, backgroundColor: props.color, borderRadius: GLOBALS.STYLES.CORNER}}>
+        <View style={{width: GLOBALS.STYLES.WIDTH, backgroundColor: props.color}}>
             <Text style={styles.titleText}>{props.title}</Text>
         </View>
     );
@@ -29,6 +32,7 @@ export default class Demographics extends Component<Props> {
     this.onStart = this.onStart.bind(this);
     this.deleteContact = this.deleteContact.bind(this);
     this.setID = this.setID.bind(this);
+    this.navigateOnStart = this.navigateOnStart.bind(this);
     this.state = {
       age:'',
       maritalStatus:'',
@@ -100,9 +104,13 @@ export default class Demographics extends Component<Props> {
 //        alert('Please fill out all fields before proceeding');
 //    } else {
 //        this.createContact();
-        // navigate to Dashboard
-        this.props.navigation.navigate('Dash');
+        this.navigateOnStart();
 //    }
+  }
+
+  navigateOnStart() {
+    // navigate to Dashboard
+    this.props.navigation.navigate('Dash');
   }
 
   // Create contact with appropriate demographics info on Qualtrics
@@ -128,7 +136,7 @@ export default class Demographics extends Component<Props> {
     return (
       <View style={styles.container}>
           <Text style={styles.pageTitle}>{this.prompt}</Text>
-
+          <Animatable.View ref="age_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.SCHEME[0]}]} animation="bounceInDown" duration={1500}>
           <Title color={GLOBALS.COLOR.SCHEME[0]} title="Age"/>
           <TextInput
             style={styles.textInput}
@@ -137,7 +145,9 @@ export default class Demographics extends Component<Props> {
             value={this.state.age}
             maxLength={2}
           />
+          </Animatable.View>
 
+          <Animatable.View ref="status_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.SCHEME[1]}]} animation="bounceInLeft" duration={1500}>
           <Title color={GLOBALS.COLOR.SCHEME[1]} title="Marital Status"/>
           <Picker
             style={styles.picker}
@@ -148,7 +158,9 @@ export default class Demographics extends Component<Props> {
             <Picker.Item label="Not married, but in relationship" value="in relationship" />
             <Picker.Item label="Single" value="single" />
           </Picker>
+          </Animatable.View>
 
+          <Animatable.View ref="language_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.SCHEME[2]}]} animation="bounceInRight" duration={1500}>
           <Title color={GLOBALS.COLOR.SCHEME[2]} title="Native Language"/>
           <Picker
             style={styles.picker}
@@ -160,7 +172,9 @@ export default class Demographics extends Component<Props> {
             <Picker.Item label="English" value="english"/>
             <Picker.Item label="Other" value="other"/>
           </Picker>
+          </Animatable.View>
 
+          <Animatable.View ref="home_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.SCHEME[3]}]} animation="bounceInLeft" duration={1500}>
           <Title color={GLOBALS.COLOR.SCHEME[3]} title="Home Province"/>
           <Picker
             style={styles.picker}
@@ -178,7 +192,9 @@ export default class Demographics extends Component<Props> {
             <Picker.Item label="Southern" value="southern"/>
             <Picker.Item label="Western" value="western"/>
           </Picker>
+          </Animatable.View>
 
+          <Animatable.View ref="hostel_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.SCHEME[4]}]} animation="bounceInRight" duration={1500}>
           <Title color={GLOBALS.COLOR.SCHEME[4]} title="Hostel"/>
           <Picker
             style={styles.picker}
@@ -189,12 +205,12 @@ export default class Demographics extends Component<Props> {
             <Picker.Item label="Option 2" value="2" />
             <Picker.Item label="Option 3" value="3" />
           </Picker>
+          </Animatable.View>
 
-          <Text style={styles.note}>{this.note}{'\n'}</Text>
-
-          <TouchableOpacity style={styles.button} onPress={()=> this.onStart()}>
-              <Text style={styles.buttonText}>Get Started!</Text>
-          </TouchableOpacity>
+          <Animatable.View ref="button_view" style={styles.item} animation="bounceInUp" duration={1500}>
+              <Text style={styles.note}>{this.note}{'\n'}</Text>
+              <AnimatableButton text="Get Started!" color={GLOBALS.COLOR.TITLETEXT} background={GLOBALS.COLOR.BLUE} onPress={()=> this.onStart()}/>
+          </Animatable.View>
       </View>
     );
   }
@@ -211,18 +227,6 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     width: GLOBALS.STYLES.WIDTH,
     fontSize: GLOBALS.FONTSIZE.NOTE
-  },
-  button: {
-    width: GLOBALS.STYLES.WIDTH,
-    backgroundColor: GLOBALS.COLOR.BLUE,
-    padding: 10,
-    borderRadius: GLOBALS.STYLES.CORNER,
-    elevation: 3
-  },
-  buttonText: {
-    textAlign: 'center',
-    color: GLOBALS.COLOR.TITLETEXT,
-    fontSize: GLOBALS.FONTSIZE.BUTTON
   },
   textInput: {
     width: GLOBALS.STYLES.WIDTH,
@@ -244,5 +248,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: GLOBALS.COLOR.LIGHTBLUE,
+  },
+  item: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

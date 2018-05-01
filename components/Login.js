@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   	fontSize: GLOBALS.FONTSIZE.TEXT
   },
   textButton: {
-  	color: GLOBALS.COLOR.TITLETEXT,
+  	color: GLOBALS.COLOR.RED,
   	fontSize: GLOBALS.FONTSIZE.TEXT,
   	fontWeight:'500'
   }

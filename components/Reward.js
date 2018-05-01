@@ -78,7 +78,9 @@ import {
   function Beginning(props) {
     return (
         <Image
-            source={require('../assets/logo.png')}
+            width = {200}
+            height = {200}
+            source={{uri: 'logo'}}
             style={{width: 200, height: 200,}}
             onPress={props.onPress}
         />

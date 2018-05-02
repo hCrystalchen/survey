@@ -141,7 +141,7 @@ export default class App extends Component<{}, State> {
     }
     return (
       <Page>
-        {!!state.accessToken  (
+        {!!state.accessToken && (
           <Form>
             <Form.Label>Welcome to the Health Application</Form.Label>
             <Form.Value>{JSON.stringify(state.idTokenJSON)}</Form.Value>

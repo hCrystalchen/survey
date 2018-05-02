@@ -104,23 +104,24 @@ export default class App extends Component<{}, State> {
   }
 
   authorize = async () => {
-    try {
-      const authState = await authorize(config);
+    this.props.navigation.navigate('Dashboard');
+    // try {
+    //   const authState = await authorize(config);
 
-      this.animateState(
-        {
-          hasLoggedInOnce: false,
-          accessToken: authState.accessToken,
-          accessTokenExpirationDate: authState.accessTokenExpirationDate,
-          refreshToken: authState.refreshToken
-        },
-        500
-      );
-      this.props.navigation.navigate('Demographics');
+    //   this.animateState(
+    //     {
+    //       hasLoggedInOnce: false,
+    //       accessToken: authState.accessToken,
+    //       accessTokenExpirationDate: authState.accessTokenExpirationDate,
+    //       refreshToken: authState.refreshToken
+    //     },
+    //     500
+    //   );
+    //   this.props.navigation.navigate('Demographics');
 
-    } catch (error) {
-      Alert.alert('Failed to log in', error.message);
-    }
+    // } catch (error) {
+    //   Alert.alert('Failed to log in', error.message);
+    // }
   };
 
   refresh = async () => {

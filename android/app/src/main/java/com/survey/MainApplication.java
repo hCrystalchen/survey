@@ -3,9 +3,11 @@ package com.survey;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactlibrary.RNAppAuthPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
-import com.wix.reactnativenotifications.RNNotificationsPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.reactlibrary.RNAppAuthPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.facebook.react.ReactNativeHost;
@@ -28,8 +30,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new VectorIconsPackage(),
             new RNAppAuthPackage(),
+            new VectorIconsPackage(),
             new ReactNativePushNotificationPackage()
       );
     }

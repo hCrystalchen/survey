@@ -14,6 +14,7 @@ import _ from 'lodash';
 import GLOBALS from './Globals.js';
 import Form from 'react-native-form';
 
+// TODO: fix registration form styling
 
 // TODO: securely hide the api token
 const api_token = '00ua58H-0ucUvhE79Pv7WwbigKn2ceSiiagG611Q24';
@@ -47,15 +48,13 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: GLOBALS.STYLES.CORNER,
     elevation: 3,
-    color: GLOBALS.COLOR.TITLETEXT,
-    fontSize: GLOBALS.FONTSIZE.TEXT,
-    fontWeight:'500',
     marginTop: '20%',
   },
   buttonText: {
     textAlign: 'center',
     color: GLOBALS.COLOR.TITLETEXT,
-    fontSize: GLOBALS.FONTSIZE.BUTTON
+    fontSize: GLOBALS.FONTSIZE.BUTTON,
+    fontWeight:'500',
   },
   textInput: {
     fontSize: 16,

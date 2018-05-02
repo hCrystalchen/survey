@@ -4,6 +4,7 @@
   "description": "Use constants in Globals.js in styling to make redesigning (if necessary) easier",
   "main": "index.js",
   "dependencies": {
+    "jest-cli": "^22.4.3",
     "react": "^16.3.2",
     "react-native": "^0.55.3",
     "react-native-animatable": "^1.2.4",
@@ -13,12 +14,16 @@
     "react-native-push-notification": "^3.0.2",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^1.5.11",
+    "react-test-renderer": "^16.3.2",
     "styled-components": "^3.2.6"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node server.js"
+  },
+  "jest": {
+    "preset": "react-native"
   },
   "repository": {
     "type": "git",

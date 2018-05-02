@@ -144,9 +144,13 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-app-auth')
+    compile project(':react-native-vector-icons')
+    compile project(':react-native-push-notification')
+    // compile project(':react-native-notifications')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-push-notification')
-    implementation project(':react-native-notifications')
+    // implementation project(':react-native-notifications')
     implementation project(':react-native-app-auth')
     implementation project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])

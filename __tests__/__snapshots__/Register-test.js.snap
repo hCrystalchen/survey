@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#BFE2FF",
+      "flex": 1,
+      "flexDirection": "column",
+      "paddingVertical": "10%",
+      "width": "100%",
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 20,
+        "fontWeight": "500",
+        "textAlign": "center",
+      }
+    }
+  >
+    Registration
+  </Text>
+  <View>
+    <View
+      customFields={Object {}}
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        autoCapitalize="words"
+        keyboardType="name-phone-pad"
+        name="firstName"
+        onChangeText={[Function]}
+        placeholder="First Name"
+        style={
+          Object {
+            "borderColor": "#FFE38C",
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+        type="TextInput"
+        value=""
+      />
+      <TextInput
+        allowFontScaling={true}
+        autoCapitalize="words"
+        keyboardType="name-phone-pad"
+        name="lastName"
+        onChangeText={[Function]}
+        placeholder="Last Name"
+        style={
+          Object {
+            "borderColor": "#FFE38C",
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+        type="TextInput"
+        value=""
+      />
+      <TextInput
+        allowFontScaling={true}
+        keyboardType="email-address"
+        name="email"
+        onChangeText={[Function]}
+        placeholder="Email"
+        style={
+          Object {
+            "borderColor": "#FFE38C",
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+        type="TextInput"
+        value=""
+      />
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "backgroundColor": "#5a96ce",
+            "borderRadius": 35,
+            "elevation": 3,
+            "marginTop": "20%",
+            "opacity": 1,
+            "padding": 10,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "white",
+              "fontSize": 18,
+              "fontWeight": "500",
+              "textAlign": "center",
+            }
+          }
+        >
+          Submit
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

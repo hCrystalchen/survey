@@ -15,7 +15,8 @@ export default class Progress extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      points: (this.props.points % 5) * 20
+      points: this.props.points,
+      progress: (this.props.points % 5) * 20
     };
   }
 
@@ -31,7 +32,7 @@ export default class Progress extends Component<Props> {
         <AnimatedCircularProgress
             size={320}
             width={50}
-            fill={this.state.points}
+            fill={this.state.progress}
             tintColor={GLOBALS.COLOR.GREEN}
             rotation={180}
             backgroundColor={GLOBALS.COLOR.PALEBLUE}>

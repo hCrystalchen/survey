@@ -18,27 +18,12 @@ import {
   function RewardIcon(props) {
     let p = props.points;
     let handler = props.onPress;
-    if (p <= 5) {
-        return <IconHelper name="heart-o" style={styles.heart} onPress={handler}/>;
-    } else if (p <= 10) {
-        return <IconHelper name="heart" style={styles.heart} onPress={handler}/>;
-    } else if (p <= 15) {
-        return <Beginning onPress={handler}/>;
-    } else if (p <= 20) {
-        return (
-            <View style={{height: 130, width: 130, borderRadius: 65, backgroundColor: GLOBALS.COLOR.GOLD, alignItems: "center", justifyContent: "center"}}>
-                <IconHelper name="smile-o" style={styles.outline} onPress={handler}/>
-            </View>
-        );
-    } else if (p <= 25) {
-        return <IconHelper name="star-o" style={styles.star} onPress={handler}/>;
-    } else if (p <= 30) {
-        return <IconHelper name="star-half-full" style={styles.star} onPress={handler}/>;
-    } else if (p <= 45) {
-        let starPoints = p - 30;
-        return <IconHelper name="star" style={styles.star} points={starPoints} onPress={handler}/>;
+    if (p <= 25) {
+        let heartPoints = p;
+        return <IconHelper name="heart" style={styles.heart} points={heartPoints} onPress={handler}/>;
     } else if (p <= 50) {
-        return <IconHelper name="gift" style={styles.gift} onPress={handler}/>;
+        let starPoints = p - 25;
+        return <IconHelper name="star" style={styles.star} points={starPoints} onPress={handler}/>;
     } else if (p <= 65) {
         let bronzePoints = p - 50;
         return <IconHelper name="trophy" style={styles.bronze} points={bronzePoints} onPress={handler}/>;
@@ -105,27 +90,23 @@ export default class Reward extends Component<Props> {
 const styles = StyleSheet.create({
   star: {
     color: GLOBALS.COLOR.YELLOW,
-    fontSize: 130
+    fontSize: 120
   },
   heart: {
     color: GLOBALS.COLOR.ROSE,
-    fontSize: 130
+    fontSize: 120
   },
   gold: {
     color: GLOBALS.COLOR.GOLD,
-    fontSize: 130
+    fontSize: 120
   },
   silver: {
     color: GLOBALS.COLOR.SILVER,
-    fontSize: 130
+    fontSize: 120
   },
   bronze: {
     color: GLOBALS.COLOR.BRONZE,
-    fontSize: 130
-  },
-  gift: {
-    color: GLOBALS.COLOR.RED,
-    fontSize: 150
+    fontSize: 120
   },
   diamond: {
     color: GLOBALS.COLOR.CRYSTAL,
@@ -138,9 +119,5 @@ const styles = StyleSheet.create({
   tinyDiamond: {
     color: GLOBALS.COLOR.CRYSTAL,
     fontSize: 25
-  },
-  outline: {
-    color: GLOBALS.COLOR.PALEGOLD,
-    fontSize: 150
   }
 });

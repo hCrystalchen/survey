@@ -14,7 +14,6 @@ export default class InAppSurvey extends Component {
     //  handleChangeNoteId = (event) => {
     //     this.setState({currentLinkID: event});
   }
-}
 
    // async saveNote() {
    //    let newNote = {

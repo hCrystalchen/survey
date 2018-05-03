@@ -1,7 +1,8 @@
 import React from 'react';
 
 export default {
-  STORE_KEY: 'a56z0fzrNpl^2',
+  // TODO: secure token
+  QUALTRICS_API: "QdrsdTFfn7YgW7pIs5qAs4M4O4cN4hzDwM0h8FeL",
   BASE_URL: 'http://someurl.com',
   COLOR: {
     LIGHTBLUE: '#BFE2FF',
@@ -23,7 +24,8 @@ export default {
     LIGHTTEXT: '#b3b3b3',
     LIGHTTAN: '#FFE38C',
     TAB: '#78A9D6',
-    SCHEME: ['#91C0E2', '#CFBAE1','#C59FC9','#96CAE3','#83BBEF']
+    SCHEME: ['#91C0E2', '#CFBAE1','#C59FC9','#96CAE3','#83BBEF'],
+    LIGHTSCHEME: ['#b3d0e5', '#d6c7e2','#c6abc9','#a6cbdd','#9bc8f2']
   },
   STYLES: {
     CORNER: 35,
@@ -36,7 +38,7 @@ export default {
     TEXT: 16,
     BUTTON: 18,
     TITLE: 20,
-    NOTE: 10
+    NOTE: 14
   }
 
 };

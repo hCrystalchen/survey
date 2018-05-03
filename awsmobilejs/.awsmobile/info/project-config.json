@@ -1,6 +1,6 @@
 {
 	"SourceDir": "/",
-	"DistributionDir": "/",
-	"BuildCommand": "react-native run-android",
+	"DistributionDir": "build",
+	"BuildCommand": "npm run-script build",
 	"StartCommand": "npm run-script start"
 }

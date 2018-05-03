@@ -151,21 +151,11 @@ class Register extends Component<Props> {
   }
 
   handleSubmit() {
-    // const options = {
-    //   url: 'https://dev-764524.oktapreview.com/api/v1/users?activate=true',
-    //   method: 'POST',
-    //   headers: {
-    //     accept: 'application/json',
-    //     contentType: 'application/json',
-    //     authorization: `SSWS ${api_token}`,
-    //   }
-    // };
-
     const formValues = {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      email: this.state.email,
-      login: this.state.email,
+      firstName: this.state.firstName.trim(),
+      lastName: this.state.lastName.trim(),
+      email: this.state.email.trim(),
+      login: this.state.email.trim(),
     };
     const valid = this.validateFormValues(formValues);
     if (!valid) {
@@ -180,34 +170,34 @@ class Register extends Component<Props> {
     }
 
     // TODO: Secure API token for final product
-    // fetch('https://dev-764524.oktapreview.com/api/v1/users?activate=true', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json',
-    //     'Authorization': `SSWS ${api_token}`,
-    //   },
-    //   body: JSON.stringify({
-    //     profile: authBody,
-    //   }),
-    // })
-    // .then((response) => response.json())
-    // .then((responseJson) => {
-    //   this.setState({
-    //     hasRegistered: true,
-    //     errorMessage: '',
-    //     hasError: false,
-    //   });
-    //   console.log("User registration response");
-    //   console.log(responseJson);
-    // })
-    // .catch((error) => {
-    //   this.setState({
-    //     errorMessage: 'There was an error registering your account. Please try again or contact your administrator.',
-    //     hasError: true,
-    //   });
-    //   console.error(error);
-    // });
+    fetch('https://dev-764524.oktapreview.com/api/v1/users?activate=true', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `SSWS ${api_token}`,
+      },
+      body: JSON.stringify({
+        profile: formValues,
+      }),
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        hasRegistered: true,
+        errorMessage: '',
+        hasError: false,
+      });
+      console.log("User registration response");
+      console.log(responseJson);
+    })
+    .catch((error) => {
+      this.setState({
+        errorMessage: 'There was an error registering your account. Please try again or contact your administrator.',
+        hasError: true,
+      });
+      console.error(error);
+    });
   }
 
 

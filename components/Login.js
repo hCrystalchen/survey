@@ -120,7 +120,7 @@ export default class App extends Component<{}, State> {
         },
         500
       );
-      // this.props.navigation.navigate('Demographics');
+      this.props.navigation.navigate('Dashboard');
 
     } catch (error) {
       Alert.alert('Failed to log in', error.message);

@@ -1,0 +1,6 @@
+{
+	"SourceDir": "/",
+	"DistributionDir": "/",
+	"BuildCommand": "react-native run-android",
+	"StartCommand": "npm run-script start"
+}

@@ -4,6 +4,7 @@ import Settings from "survey/components/Settings.js";
 import GLOBALS from 'survey/components/Globals.js';
 import { authorize } from 'react-native-app-auth';
 import { Page, Button, ButtonContainer, Form, Heading } from '../components';
+import { Buffer } from 'buffer';
 
 import {
   StackNavigator,
@@ -28,7 +29,8 @@ type State = {
   hasLoggedInOnce: boolean,
   accessToken: ?string,
   accessTokenExpirationDate: ?string,
-  refreshToken: ?string
+  refreshToken: ?string,
+  idToken: ?string
 };
 
 const config = {
@@ -91,7 +93,8 @@ export default class App extends Component<{}, State> {
     hasLoggedInOnce: false,
     accessToken: '',
     accessTokenExpirationDate: '',
-    refreshToken: ''
+    refreshToken: '',
+    idToken: ''
   };
 
   animateState(nextState: $Shape<State>, delay: number = 0) {
@@ -112,47 +115,15 @@ export default class App extends Component<{}, State> {
           hasLoggedInOnce: false,
           accessToken: authState.accessToken,
           accessTokenExpirationDate: authState.accessTokenExpirationDate,
-          refreshToken: authState.refreshToken
+          refreshToken: authState.refreshToken,
+          idToken: authState.idToken
         },
         500
       );
-      this.props.navigation.navigate('Demographics');
+      this.props.navigation.navigate('Dashboard');
 
     } catch (error) {
       Alert.alert('Failed to log in', error.message);
-    }
-  };
-
-  refresh = async () => {
-    try {
-      const authState = await refresh(config, {
-        refreshToken: this.state.refreshToken
-      });
-
-      this.animateState({
-        accessToken: authState.accessToken || this.state.accessToken,
-        accessTokenExpirationDate:
-          authState.accessTokenExpirationDate || this.state.accessTokenExpirationDate,
-        refreshToken: authState.refreshToken || this.state.refreshToken
-      });
-    } catch (error) {
-      Alert.alert('Failed to refresh token', error.message);
-    }
-  };
-
-  revoke = async () => {
-    try {
-      await revoke(config, {
-        tokenToRevoke: this.state.accessToken,
-        sendClientId: true
-      });
-      this.animateState({
-        accessToken: '',
-        accessTokenExpirationDate: '',
-        refreshToken: ''
-      });
-    } catch (error) {
-      Alert.alert('Failed to revoke token', error.message);
     }
   };
 
@@ -162,22 +133,20 @@ export default class App extends Component<{}, State> {
 
   render() {
     const { state } = this;
+    if (state.idToken) {
+      const jwtBody = state.idToken.split('.')[1];
+      const base64 = jwtBody.replace('-', '+').replace('_', '/');
+      const decodedJwt = Buffer.from(base64, 'base64');
+      state.idTokenJSON = JSON.parse(decodedJwt);
+    }
     return (
       <Page>
-        {!!state.accessToken ? (
+        {!!state.accessToken && (
           <Form>
-            <Form.Label>accessToken</Form.Label>
-            <Form.Value>{state.accessToken}</Form.Value>
+            <Form.Label>Welcome to the Health Application</Form.Label>
+            <Form.Value>{JSON.stringify(state.idTokenJSON)}</Form.Value>
           </Form>
-        ) : (
-          <Heading><Image
-          source={require('../assets/logo.png')}
-          style={{width: 375, height: 375, }}
-        /></Heading>
         )}
-
-
-
 
 
     <ButtonContainer>

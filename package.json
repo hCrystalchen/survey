@@ -4,6 +4,7 @@
   "description": "Use constants in Globals.js in styling to make redesigning (if necessary) easier",
   "main": "index.js",
   "dependencies": {
+    "buffer": "^5.1.0",
     "jest-cli": "^22.4.3",
     "react": "^16.3.2",
     "react-native": "^0.55.3",

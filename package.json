@@ -4,7 +4,11 @@
   "description": "Use constants in Globals.js in styling to make redesigning (if necessary) easier",
   "main": "index.js",
   "dependencies": {
+    "aws-amplify": "^0.3.3",
+    "aws-amplify-react": "^0.1.43",
+    "aws-amplify-react-native": "^0.2.9",
     "buffer": "^5.1.0",
+    "is-url": "^1.2.4",
     "jest-cli": "^22.4.3",
     "react": "^16.3.2",
     "react-native": "^0.55.3",

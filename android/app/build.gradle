@@ -143,7 +143,11 @@ android {
     }
 }
 
+
 dependencies {
+    compile 'com.journeyapps:zxing-android-embedded:3.6.0'
+
+
     compile project(':react-native-app-auth')
     compile project(':react-native-vector-icons')
     compile project(':react-native-push-notification')
@@ -151,6 +155,8 @@ dependencies {
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-push-notification')
     // implementation project(':react-native-notifications')
+
+    implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.6.+'
     implementation project(':react-native-app-auth')
     implementation project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])

@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 
 
 import { WebView } from 'react-native';
-<<<<<<< HEAD
-=======
-
->>>>>>> c6b31edb9886e8c728e7bf61e9e53fdba4ded714
 
 export default class InAppSurvey extends Component {
   constructor() {
@@ -43,7 +39,7 @@ export default class InAppSurvey extends Component {
   render() {
     return (
       <WebView
-        source={{uri: 'https://brown.co1.qualtrics.com/jfe/form/SV_cu9ppqo1mckUqSF'}}
+        source={{uri: 'https://s3.amazonaws.com/yoursurvey/quickstart.html'}}
         style={{height: '80%'}}
         domStorageEnabled={true}
         scalesPageToFit={true}              

@@ -13,12 +13,13 @@ import {
   Button,
   ScrollView,
   TouchableOpacity,
-  AsyncStorage
+  AsyncStorage,
+  Keyboard
 } from 'react-native';
 
 function Title(props) {
     return (
-        <View style={{width: GLOBALS.STYLES.WIDTH, backgroundColor: props.color}}>
+        <View style={{width: '40%', height: '100%', backgroundColor: props.color, justifyContent: 'center'}}>
             <Text style={styles.titleText}>{props.title}</Text>
         </View>
     );
@@ -91,7 +92,7 @@ export default class Demographics extends Component<Props> {
     fetch(url, {
         method: "DELETE",
         headers: {
-            "X-Api-Token": "QdrsdTFfn7YgW7pIs5qAs4M4O4cN4hzDwM0h8FeL"
+            "X-Api-Token": GLOBALS.QUALTRICS_API
         }
     }).catch(function(error) {
         console.log('There has been a problem with your fetch(delete contact) operation:' + error.message);
@@ -100,12 +101,12 @@ export default class Demographics extends Component<Props> {
 
   // Handles onPress of start button: check if all fields are filled out and create contact on Qualtrics
   onStart() {
-//    if (this.state.age == '' || this.state.maritalStatus == '' || this.state.language == '' || this.state.homeProvince == '' || this.state.hostel == '') {
-//        alert('Please fill out all fields before proceeding');
-//    } else {
-//        this.createContact();
+    if (this.state.age == '' || this.state.maritalStatus == '' || this.state.language == '' || this.state.homeProvince == '' || this.state.hostel == '') {
+        alert('Please fill out all fields before proceeding');
+    } else {
+        this.createContact();
         this.navigateOnStart();
-//    }
+    }
   }
 
   navigateOnStart() {
@@ -122,7 +123,7 @@ export default class Demographics extends Component<Props> {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "X-Api-Token": "QdrsdTFfn7YgW7pIs5qAs4M4O4cN4hzDwM0h8FeL"
+            "X-Api-Token": GLOBALS.QUALTRICS_API
         },
         body: data
     }).then(function(response) {
@@ -136,18 +137,19 @@ export default class Demographics extends Component<Props> {
     return (
       <View style={styles.container}>
           <Text style={styles.pageTitle}>{this.prompt}</Text>
-          <Animatable.View ref="age_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.SCHEME[0]}]} animation="bounceInDown" duration={1500}>
+          <Animatable.View ref="age_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.LIGHTSCHEME[0]}]} animation="bounceInDown" duration={1500}>
           <Title color={GLOBALS.COLOR.SCHEME[0]} title="Age"/>
           <TextInput
             style={styles.textInput}
             keyboardType='numeric'
             onChangeText={(text)=> this.onAgeChanged(text)}
+            onBlur={() => Keyboard.dismiss}
             value={this.state.age}
             maxLength={2}
           />
           </Animatable.View>
 
-          <Animatable.View ref="status_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.SCHEME[1]}]} animation="bounceInLeft" duration={1500}>
+          <Animatable.View ref="status_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.LIGHTSCHEME[1]}]} animation="bounceInLeft" duration={1500}>
           <Title color={GLOBALS.COLOR.SCHEME[1]} title="Marital Status"/>
           <Picker
             style={styles.picker}
@@ -160,7 +162,7 @@ export default class Demographics extends Component<Props> {
           </Picker>
           </Animatable.View>
 
-          <Animatable.View ref="language_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.SCHEME[2]}]} animation="bounceInRight" duration={1500}>
+          <Animatable.View ref="language_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.LIGHTSCHEME[2]}]} animation="bounceInRight" duration={1500}>
           <Title color={GLOBALS.COLOR.SCHEME[2]} title="Native Language"/>
           <Picker
             style={styles.picker}
@@ -174,7 +176,7 @@ export default class Demographics extends Component<Props> {
           </Picker>
           </Animatable.View>
 
-          <Animatable.View ref="home_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.SCHEME[3]}]} animation="bounceInLeft" duration={1500}>
+          <Animatable.View ref="home_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.LIGHTSCHEME[3]}]} animation="bounceInLeft" duration={1500}>
           <Title color={GLOBALS.COLOR.SCHEME[3]} title="Home Province"/>
           <Picker
             style={styles.picker}
@@ -194,7 +196,7 @@ export default class Demographics extends Component<Props> {
           </Picker>
           </Animatable.View>
 
-          <Animatable.View ref="hostel_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.SCHEME[4]}]} animation="bounceInRight" duration={1500}>
+          <Animatable.View ref="hostel_view" style={[styles.item, {backgroundColor: GLOBALS.COLOR.LIGHTSCHEME[4]}]} animation="bounceInRight" duration={1500}>
           <Title color={GLOBALS.COLOR.SCHEME[4]} title="Hostel"/>
           <Picker
             style={styles.picker}
@@ -207,7 +209,7 @@ export default class Demographics extends Component<Props> {
           </Picker>
           </Animatable.View>
 
-          <Animatable.View ref="button_view" style={styles.item} animation="bounceInUp" duration={1500}>
+          <Animatable.View ref="button_view" style={styles.buttonContainer} animation="bounceInUp" duration={1500}>
               <Text style={styles.note}>{this.note}{'\n'}</Text>
               <AnimatableButton text="Get Started!" color={GLOBALS.COLOR.TITLETEXT} background={GLOBALS.COLOR.BLUE} onPress={()=> this.onStart()}/>
           </Animatable.View>
@@ -218,23 +220,22 @@ export default class Demographics extends Component<Props> {
 
 const styles = StyleSheet.create({
   pageTitle: {
-    textAlign: 'left',
+    textAlign: 'center',
     width: GLOBALS.STYLES.WIDTH,
     fontSize: GLOBALS.FONTSIZE.TITLE,
     marginBottom: 10
   },
   note: {
-    textAlign: 'left',
+    textAlign: 'center',
     width: GLOBALS.STYLES.WIDTH,
     fontSize: GLOBALS.FONTSIZE.NOTE
   },
   textInput: {
-    width: GLOBALS.STYLES.WIDTH,
+    width: '60%',
     textAlign:'left'
   },
   picker: {
-    height: 50,
-    width: GLOBALS.STYLES.WIDTH,
+    width: '60%',
     justifyContent: 'center',
   },
   titleText: {
@@ -251,7 +252,14 @@ const styles = StyleSheet.create({
   },
   item: {
     width: '100%',
+    height: 60,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection:'row',
+  },
+  buttonContainer: {
+    width: '100%',
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+ }
 });

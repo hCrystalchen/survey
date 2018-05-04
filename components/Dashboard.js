@@ -58,7 +58,7 @@ export default class Settings extends Component<Props> {
     fetch("https://brown.co1.qualtrics.com/API/v3/mailinglists/ML_2ujejm2mcElgSkB/contacts/" + user, {
         method: "GET",
         headers: {
-            "X-Api-Token": "QdrsdTFfn7YgW7pIs5qAs4M4O4cN4hzDwM0h8FeL"
+            "X-Api-Token": GLOBALS.QUALTRICS_API
         }
     }).then(function(response) {
         return response.json();
@@ -68,6 +68,7 @@ export default class Settings extends Component<Props> {
   }
 
   parseResponseHistory(data) {
+    console.log(data);
     var responseNum = data.result.responseHistory.length;
     this.setState({num_response: responseNum});
   }

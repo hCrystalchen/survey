@@ -19,7 +19,7 @@ import {
 
 function Title(props) {
     return (
-        <View style={{width: '40%', height: '100%', backgroundColor: props.color, justifyContent: 'center'}}>
+        <View style={{width: '50%', height: '100%', backgroundColor: props.color, justifyContent: 'center'}}>
             <Text style={styles.titleText}>{props.title}</Text>
         </View>
     );
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     textAlign:'left'
   },
   picker: {
-    width: '60%',
+    width: '50%',
     justifyContent: 'center',
   },
   titleText: {
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
   },
   item: {
     width: '100%',
-    height: 60,
+    height: '10%',
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection:'row',

@@ -41,7 +41,7 @@ import {
         return <IconHelper name="diamond" style={styles.smallDiamond} points={diamondPoints} onPress={handler}/>;
     } else {
         let diamondPoints = p - 100;
-        return <IconHelper name="diamond" style={styles.smallDiamond} points={diamondPoints} onPress={handler}/>;
+        return <IconHelper name="diamond" style={styles.tinyDiamond} points={diamondPoints} onPress={handler}/>;
     }
   }
 
@@ -90,34 +90,34 @@ export default class Reward extends Component<Props> {
 const styles = StyleSheet.create({
   star: {
     color: GLOBALS.COLOR.YELLOW,
-    fontSize: 120
+    fontSize: GLOBALS.STYLES.SCREENWIDTH / 3.5
   },
   heart: {
     color: GLOBALS.COLOR.ROSE,
-    fontSize: 120
+    fontSize: GLOBALS.STYLES.SCREENWIDTH / 3.5
   },
   gold: {
     color: GLOBALS.COLOR.GOLD,
-    fontSize: 120
+    fontSize: GLOBALS.STYLES.SCREENWIDTH / 3.5
   },
   silver: {
     color: GLOBALS.COLOR.SILVER,
-    fontSize: 120
+    fontSize: GLOBALS.STYLES.SCREENWIDTH / 3.5
   },
   bronze: {
     color: GLOBALS.COLOR.BRONZE,
-    fontSize: 120
+    fontSize: GLOBALS.STYLES.SCREENWIDTH / 3.5
   },
   diamond: {
     color: GLOBALS.COLOR.CRYSTAL,
-    fontSize: 110
+    fontSize: GLOBALS.STYLES.SCREENWIDTH / 4
   },
   smallDiamond: {
     color: GLOBALS.COLOR.CRYSTAL,
-    fontSize: 70
+    fontSize: GLOBALS.STYLES.SCREENWIDTH / 5
   },
   tinyDiamond: {
     color: GLOBALS.COLOR.CRYSTAL,
-    fontSize: 25
+    fontSize: GLOBALS.STYLES.SCREENWIDTH / 6
   }
 });

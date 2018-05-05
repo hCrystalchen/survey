@@ -57,5 +57,9 @@ features:
     components:
       analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}
   sign-in: !com.amazonaws.mobilehub.v0.SignIn {}
+<<<<<<< HEAD
+name: Health Survey
+=======
 name: survey
+>>>>>>> b585f0c9ff1b1d668146b636c803fcfd9518d9a3
 region: us-east-1

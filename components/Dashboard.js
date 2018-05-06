@@ -68,7 +68,6 @@ export default class Settings extends Component<Props> {
   }
 
   parseResponseHistory(data) {
-    console.log(data);
     var responseNum = data.result.responseHistory.length;
     this.setState({num_response: responseNum});
   }

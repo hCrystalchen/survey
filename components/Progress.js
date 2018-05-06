@@ -7,7 +7,7 @@ import Reward from './Reward.js';
 import {
   Platform,
   StyleSheet,
-  View
+  View,
 } from 'react-native';
 
 type Props = {};
@@ -22,7 +22,10 @@ export default class Progress extends Component<Props> {
 
   componentWillReceiveProps(nextProps) {
     if (this.props !== nextProps) {
-        this.setState({points: (nextProps.points % 5) *20});
+        this.setState({
+            points: nextProps.points,
+            progress: (nextProps.points % 5) *20
+        });
     }
   }
 
@@ -30,8 +33,8 @@ export default class Progress extends Component<Props> {
     return (
       <View style={styles.container}>
         <AnimatedCircularProgress
-            size={320}
-            width={50}
+            size={GLOBALS.STYLES.SCREENWIDTH * 0.8}
+            width={GLOBALS.STYLES.SCREENWIDTH / 7}
             fill={this.state.progress}
             tintColor={GLOBALS.COLOR.GREEN}
             rotation={180}

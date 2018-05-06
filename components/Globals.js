@@ -1,5 +1,9 @@
 import React from 'react';
 
+import {
+  Dimensions
+} from 'react-native';
+
 export default {
   // TODO: secure token
   QUALTRICS_API: "QdrsdTFfn7YgW7pIs5qAs4M4O4cN4hzDwM0h8FeL",
@@ -29,16 +33,18 @@ export default {
   },
   STYLES: {
     CORNER: 35,
-    YMARGIN: 10,
+    YMARGIN: '2%',
     BUTTONWIDTH: '50%',
     WIDTH: '90%',
-    FULL: '100%'
+    FULL: '100%',
+    SCREENWIDTH: Dimensions.get('window').width,
+    SCREENHEIGHT: Dimensions.get('window').height
   },
   FONTSIZE: {
     TEXT: 16,
     BUTTON: 18,
     TITLE: 20,
-    NOTE: 14
+    NOTE: 10
   }
 
 };

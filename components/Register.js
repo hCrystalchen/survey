@@ -13,6 +13,7 @@ import {
 import _ from 'lodash';
 import GLOBALS from './Globals.js';
 import Form from 'react-native-form';
+import { sha256 } from 'react-native-sha256';
 
 
 // TODO: fix registration form styling
@@ -204,9 +205,16 @@ class Register extends Component<Props> {
       console.error(error);
     });
   }
-
+  createID() {
+    const { state } = this;
+    sha256(state.oktaID).then( hash =>{
+      state.userID = hash;
+    })
+    
+  }
 
   render() {
+    this.createID();
     return (
       <View style={styles.container}>
         <Text style={styles.header}>Registration</Text>
@@ -227,7 +235,7 @@ class Register extends Component<Props> {
             <Button 
               style={styles.demographicButton}
               title="Demographic Survey"
-              onPress={() => this.props.navigation.navigate('Demographics')}
+              onPress={() => this.props.navigation.navigate('Demographics', {userID: authstate.userID})}
             />
           </View>
           : 

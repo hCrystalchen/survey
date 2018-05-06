@@ -697,62 +697,6 @@ atob@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.0.tgz#ab2b150e51d7b122b9efc8d7340c06b6c41076bc"
 
-aws-amplify-react-native@^0.2.9:
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/aws-amplify-react-native/-/aws-amplify-react-native-0.2.9.tgz#38234c70332b8cd88ec952c00939fc6616e65f4e"
-  dependencies:
-    aws-amplify "^0.3.x"
-    axios "^0.17.1"
-    babel-preset-es2015 "^6.24.1"
-
-aws-amplify-react@^0.1.43:
-  version "0.1.43"
-  resolved "https://registry.yarnpkg.com/aws-amplify-react/-/aws-amplify-react-0.1.43.tgz#db906be3c861148a1d155a3d46abba68356130b0"
-  dependencies:
-    qrcode.react "^0.8.0"
-    regenerator-runtime "^0.11.1"
-
-aws-amplify@^0.3.3, aws-amplify@^0.3.x:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-0.3.3.tgz#b12aa6c90893d716dd9691c7ff55b38cf1f1ffc6"
-  dependencies:
-    "@types/paho-mqtt" "^1.0.3"
-    "@types/zen-observable" "^0.5.3"
-    amazon-cognito-auth-js "^1.1.9"
-    amazon-cognito-identity-js "^2.0.0"
-    aws-sdk "2.198.0"
-    axios "^0.17.0"
-    graphql "^0.13.1"
-    paho-mqtt "^1.0.4"
-    uuid "^3.2.1"
-    zen-observable "^0.8.6"
-
-aws-sdk@2.198.0:
-  version "2.198.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.198.0.tgz#2245311337ddc844cc34c13f3fcf3b7ea843f434"
-  dependencies:
-    buffer "4.9.1"
-    events "^1.1.1"
-    jmespath "0.15.0"
-    querystring "0.2.0"
-    sax "1.2.1"
-    url "0.10.3"
-    uuid "3.1.0"
-    xml2js "0.4.17"
-    xmlbuilder "4.2.1"
-
-aws-sign2@~0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
-
-aws-sign2@~0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
-
-aws4@^1.2.1, aws4@^1.6.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.7.0.tgz#d4d0e9b9dbfca77bf08eeb0a8a471550fe39e289"
-
 axios@^0.17.0, axios@^0.17.1:
   version "0.17.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.17.1.tgz#2d8e3e5d0bdbd7327f91bc814f5c57660f81824d"
@@ -4485,6 +4429,12 @@ react-native-safe-area-view@^0.7.0:
 react-native-sha256@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-native-sha256/-/react-native-sha256-1.1.1.tgz#3598dba556b0bbcd12618bd101c10d130c217fc3"
+
+react-native-tab-view@0.0.77:
+  version "0.0.77"
+  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.77.tgz#11ceb8e7c23100d07e628dc151b57797524d00d4"
+  dependencies:
+    prop-types "^15.6.0"
 
 "react-native-tab-view@github:react-navigation/react-native-tab-view":
   version "0.0.74"

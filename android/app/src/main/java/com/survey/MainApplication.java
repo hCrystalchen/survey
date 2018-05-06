@@ -3,6 +3,7 @@ package com.survey;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.sha256lib.Sha256Package;
 import com.reactlibrary.RNAppAuthPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new Sha256Package(),
             new RNAppAuthPackage(),
             new VectorIconsPackage(),
             new ReactNativePushNotificationPackage()

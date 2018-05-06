@@ -19,7 +19,8 @@ import {
   Image,
   Alert,
   UIManager, 
-  LayoutAnimation
+  LayoutAnimation,
+  BackHandler
 } from 'react-native';
 
 UIManager.setLayoutAnimationEnabledExperimental &&
@@ -97,14 +98,21 @@ export default class App extends Component<{}, State> {
     refreshToken: '',
     idToken: '',
     apiResponse: null,
-    noteId: '',
     userID: '',
     oktaID: ''
      };
 
-  handleChangeNoteId = (event) => {
-        this.setState({noteId: event});
-  };
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    return true;
+  }
 
   animateState(nextState: $Shape<State>, delay: number = 0) {
     setTimeout(() => {
@@ -137,7 +145,7 @@ export default class App extends Component<{}, State> {
         authState.oktaID = JSON.stringify(authState.idTokenJSON.sub);
       }
       this.createID();
-      // this.props.navigation.navigate('Dashboard', {userID: authstate.userID});
+      this.props.navigation.navigate('Dashboard', {userID: authState.userID});
       
 
     } catch (error) {
@@ -157,20 +165,22 @@ export default class App extends Component<{}, State> {
     this.props.navigation.navigate('Register');
   }
 
+  goHome() {
+    const { state } = this;
+    this.props.navigation.navigate('Dashboard', {userID: ""});
+  }
+
   render() {
     const { state } = this;
     return (
       <Page>
         {!!state.accessToken && (
-          <Text>
-            {/* <Form.Label>Welcome to the Health Application</Form.Label> */}
-            {/* <Form.Value>{JSON.stringify(state.idTokenJSON)}</Form.Value> */}
-            {JSON.stringify(state.oktaID)}
-            {JSON.stringify(state.userID)}
-          </Text>
-          
+           <ButtonContainer>
+        
+             <Button onPress={this.goHome} text="Dashboard" color="#5a96ce" />
+           
+           </ButtonContainer>
         )}
-
 
     <ButtonContainer>
     {!state.accessToken && (

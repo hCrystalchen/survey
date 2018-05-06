@@ -5,9 +5,6 @@ import PushNotification from 'react-native-push-notification';
 import {AppState, View, AsyncStorage} from 'react-native';
 import {scheduleNotification, setNotify} from 'survey/components/Helpers.js';
 
-import aws_exports from 'survey/aws-exports';
-import Amplify, { API } from 'aws-amplify';
-
 
 class App extends Component {
   constructor() {

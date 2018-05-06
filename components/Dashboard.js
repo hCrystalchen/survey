@@ -13,7 +13,7 @@ import {
   View,
   Switch,
   TouchableOpacity,
-  Image
+  Image,
 } from 'react-native';
 
 
@@ -44,6 +44,7 @@ export default class Settings extends Component<Props> {
   componentWillMount() {
     this.getResponseHistory();
   }
+
 
   onTakeSurvey(){
     this.props.navigation.navigate('InAppSurvey');

@@ -4,9 +4,6 @@
   "description": "Use constants in Globals.js in styling to make redesigning (if necessary) easier",
   "main": "index.js",
   "dependencies": {
-    "aws-amplify": "^0.3.3",
-    "aws-amplify-react": "^0.1.43",
-    "aws-amplify-react-native": "^0.2.9",
     "buffer": "^5.1.0",
     "is-url": "^1.2.4",
     "jest-cli": "^22.4.3",
@@ -17,6 +14,7 @@
     "react-native-circular-progress": "^0.2.0",
     "react-native-form": "^2.1.2",
     "react-native-push-notification": "^3.0.2",
+    "react-native-sha256": "^1.1.1",
     "react-native-tab-view": "0.0.77",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^1.5.11",

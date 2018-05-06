@@ -5,6 +5,8 @@ import PushNotification from 'react-native-push-notification';
 import {AppState, View, AsyncStorage} from 'react-native';
 import {scheduleNotification, setNotify} from 'survey/components/Helpers.js';
 
+
+
 class App extends Component {
   constructor() {
     super();

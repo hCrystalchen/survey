@@ -1,65 +1,59 @@
 --- !com.amazonaws.mobilehub.v0.Project 
+apps:
+  react-native: !com.amazonaws.mobilehub.v0.AppDO {}
 features:
   cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
     components:
-      currentLinkCRUD: !com.amazonaws.mobilehub.v0.API 
+      UserDataCRUD: !com.amazonaws.mobilehub.v0.API 
         attributes:
-          name: currentLinkCRUD
+          name: UserDataCRUD
           requires-signin: false
           sdk-generation-stage-name: Development
         paths:
-          /currentLink: !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/currentLink-20180503012017.zip
-            description: 'Handler for calls to resource path : /currentLink/{proxy+}'
+          /UserData: !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/UserData-20180505222402.zip
+            description: 'Handler for calls to resource path : /UserData/{proxy+}'
             enableCORS: true
             environment: {}
             handler: lambda.handler
-            hashcode: Rz2FzeNOIiAD/sjDVc+5k4Tuh7WJ+A5O0B6vN+bNxXI=
+            hashcode: jB8wjTRVHbsp0u2766AxP6xvSpxPXKaKa2tLr2JHIio=
             memorySize: '128'
-            modified: '2018-05-03T05:21:02.454+0000'
-            name: currentLink
+            modified: '2018-05-06T02:24:33.004+0000'
+            name: UserData
             runtime: nodejs6.10
             timeout: '3'
-            version: 3CtDU2Bms8Gre_6R4FBerKPKbxogcQhY
-          '/currentLink/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/currentLink-20180503012017.zip
-            description: 'Handler for calls to resource path : /currentLink/{proxy+}'
+            version: 0ttRaBJ9Bux3B74TamBDVE5Ky_nAQZcI
+          '/UserData/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/UserData-20180505222402.zip
+            description: 'Handler for calls to resource path : /UserData/{proxy+}'
             enableCORS: true
             environment: {}
             handler: lambda.handler
-            hashcode: Rz2FzeNOIiAD/sjDVc+5k4Tuh7WJ+A5O0B6vN+bNxXI=
+            hashcode: jB8wjTRVHbsp0u2766AxP6xvSpxPXKaKa2tLr2JHIio=
             memorySize: '128'
-            modified: '2018-05-03T05:21:02.454+0000'
-            name: currentLink
+            modified: '2018-05-06T02:24:33.004+0000'
+            name: UserData
             runtime: nodejs6.10
             timeout: '3'
-            version: AH5fAT4tqeu8.zN.Ovmo8imzwwmvsLH8
-  content-delivery: !com.amazonaws.mobilehub.v0.ContentDelivery 
-    attributes:
-      enabled: true
-      visibility: public-global
-    components:
-      release: !com.amazonaws.mobilehub.v0.Bucket {}
+            version: dGBfYjSyHjA8wJma54IHSwonsnprIHD4
   database: !com.amazonaws.mobilehub.v0.Database 
     components:
       database-nosql: !com.amazonaws.mobilehub.v0.NoSQLDatabase 
         tables:
           - !com.amazonaws.mobilehub.v0.NoSQLTable 
             attributes:
-              currentLinkID: S
-            hashKeyName: currentLinkID
+              oktaID: S
+              qualtricsID: S
+              userID: S
+            hashKeyName: userID
             hashKeyType: S
             rangeKeyName: ''
             rangeKeyType: ''
-            tableName: ___DYNAMIC_PREFIX___-currentLink
+            tableName: ___DYNAMIC_PREFIX___-UserData
             tablePrivacy: public
   mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint 
     components:
       analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}
   sign-in: !com.amazonaws.mobilehub.v0.SignIn {}
-<<<<<<< HEAD
-name: Health Survey
-=======
-name: survey
->>>>>>> b585f0c9ff1b1d668146b636c803fcfd9518d9a3
+name: Health Survey Application
 region: us-east-1

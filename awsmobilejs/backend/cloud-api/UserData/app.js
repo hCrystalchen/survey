@@ -15,16 +15,16 @@ AWS.config.update({ region: process.env.REGION });
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 const mhprefix  = process.env.MOBILE_HUB_DYNAMIC_PREFIX;
-let tableName = "currentLink";
+let tableName = "UserData";
 const hasDynamicPrefix = true;
 
 const userIdPresent = false;
-const partitionKeyName = "currentLinkID";
+const partitionKeyName = "userID";
 const partitionKeyType = "S"
 const sortKeyName = "";
 const sortKeyType = "";
 const hasSortKey = false;
-const path = "/currentLink";
+const path = "/UserData";
 
 const awsmobile = {}
 
@@ -56,7 +56,7 @@ const convertUrlType = (param, type) => {
  * HTTP Get method for list objects *
  ********************************/
 
-app.get('/currentLink/:currentLinkID', function(req, res) {
+app.get('/UserData/:userID', function(req, res) {
   var condition = {}
   condition[partitionKeyName] = {
     ComparisonOperator: 'EQ'
@@ -90,7 +90,7 @@ app.get('/currentLink/:currentLinkID', function(req, res) {
  * HTTP Get method for get single object *
  *****************************************/
 
-app.get('/currentLink/object/:currentLinkID', function(req, res) {
+app.get('/UserData/object/:userID', function(req, res) {
   var params = {};
   if (userIdPresent && req.apiGateway) {
     params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
@@ -179,7 +179,7 @@ app.post(path, function(req, res) {
 * HTTP remove method to delete object *
 ***************************************/
 
-app.delete('/currentLink/object/:currentLinkID', function(req, res) {
+app.delete('/UserData/object/:userID', function(req, res) {
   var params = {};
   if (userIdPresent && req.apiGateway) {
     params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;

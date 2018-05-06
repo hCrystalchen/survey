@@ -74,6 +74,8 @@ export default class Settings extends Component<Props> {
   }
 
   render() {
+    const { params } = this.props.navigation.state;
+    const userID = params ? params.userID : null;
     return (
       <View style={styles.page}>
             <Progress points={this.state.num_response}/>

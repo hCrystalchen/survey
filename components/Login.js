@@ -95,7 +95,15 @@ export default class App extends Component<{}, State> {
     accessToken: '',
     accessTokenExpirationDate: '',
     refreshToken: '',
-    idToken: ''
+    idToken: '',
+    apiResponse: null,
+    noteId: '',
+    userID: '',
+    oktaID: ''
+     };
+
+  handleChangeNoteId = (event) => {
+        this.setState({noteId: event});
   };
 
   animateState(nextState: $Shape<State>, delay: number = 0) {
@@ -110,6 +118,9 @@ export default class App extends Component<{}, State> {
   authorize = async () => {
     try {
       const authState = await authorize(config);
+      const jwtBody = authState.idToken.split('.')[1];
+      const base64 = jwtBody.replace('-', '+').replace('_', '/');
+      const decodedJwt = Buffer.from(base64, 'base64');
 
       this.animateState(
         {
@@ -117,11 +128,15 @@ export default class App extends Component<{}, State> {
           accessToken: authState.accessToken,
           accessTokenExpirationDate: authState.accessTokenExpirationDate,
           refreshToken: authState.refreshToken,
-          idToken: authState.idToken
+          idToken: authState.idToken,
+          idTokenJSON: JSON.parse(decodedJwt),
+          userID: 0
         },
         500
       );
-      this.props.navigation.navigate('Dashboard');
+      this.saveNote();
+      this.props.navigation.navigate('Dashboard', {userID: '0'});
+      
 
     } catch (error) {
       Alert.alert('Failed to log in', error.message);
@@ -132,14 +147,37 @@ export default class App extends Component<{}, State> {
     this.props.navigation.navigate('Register');
   }
 
+  async saveNote() {
+    let newNote = {
+      body: {
+        "oktaID": this.state.oktaID,
+        "userID": this.state.userID,
+        "qualtricsID": ''
+      }
+    }
+    const path = "/UserData";
+
+    // Use the API module to save the note to the database
+    try {
+      const apiResponse = await API.put("UserDataCRUD", path, newNote)
+      console.log("response from saving note: " + apiResponse);
+      this.setState({apiResponse});
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   render() {
     const { state } = this;
-    if (state.idToken) {
-      const jwtBody = state.idToken.split('.')[1];
-      const base64 = jwtBody.replace('-', '+').replace('_', '/');
-      const decodedJwt = Buffer.from(base64, 'base64');
-      state.idTokenJSON = JSON.parse(decodedJwt);
-    }
+    // if (state.idToken) {
+    //   const jwtBody = state.idToken.split('.')[1];
+    //   const base64 = jwtBody.replace('-', '+').replace('_', '/');
+    //   const decodedJwt = Buffer.from(base64, 'base64');
+    //   state.idTokenJSON = JSON.parse(decodedJwt);
+    //   state.oktaID = JSON.stringify(state.idTokenJSON);
+    //   state.userID = 0;
+
+    // }
     return (
       <Page>
         {!!state.accessToken && (

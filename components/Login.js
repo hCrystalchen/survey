@@ -5,7 +5,7 @@ import GLOBALS from 'survey/components/Globals.js';
 import { authorize } from 'react-native-app-auth';
 import { Page, Button, ButtonContainer, Form, Heading } from '../components';
 import { Buffer } from 'buffer';
-
+import { sha256 } from 'react-native-sha256';
 
 import {
   StackNavigator,
@@ -118,9 +118,6 @@ export default class App extends Component<{}, State> {
   authorize = async () => {
     try {
       const authState = await authorize(config);
-      const jwtBody = authState.idToken.split('.')[1];
-      const base64 = jwtBody.replace('-', '+').replace('_', '/');
-      const decodedJwt = Buffer.from(base64, 'base64');
 
       this.animateState(
         {
@@ -128,14 +125,19 @@ export default class App extends Component<{}, State> {
           accessToken: authState.accessToken,
           accessTokenExpirationDate: authState.accessTokenExpirationDate,
           refreshToken: authState.refreshToken,
-          idToken: authState.idToken,
-          idTokenJSON: JSON.parse(decodedJwt),
-          userID: 0
+          idToken: authState.idToken
         },
         500
       );
-      this.saveNote();
-      this.props.navigation.navigate('Dashboard', {userID: '0'});
+      if (authState.idToken) {
+        const jwtBody = authState.idToken.split('.')[1];
+        const base64 = jwtBody.replace('-', '+').replace('_', '/');
+        const decodedJwt = Buffer.from(base64, 'base64');
+        authState.idTokenJSON = JSON.parse(decodedJwt);
+        authState.oktaID = JSON.stringify(authState.idTokenJSON.sub);
+      }
+      this.createID();
+      // this.props.navigation.navigate('Dashboard', {userID: authstate.userID});
       
 
     } catch (error) {
@@ -143,48 +145,30 @@ export default class App extends Component<{}, State> {
     }
   };
 
+  createID() {
+    const { state } = this;
+    sha256(state.oktaID).then( hash =>{
+      state.userID = hash;
+    })
+    
+  }
+
   onSignup() {
     this.props.navigation.navigate('Register');
   }
 
-  async saveNote() {
-    let newNote = {
-      body: {
-        "oktaID": this.state.oktaID,
-        "userID": this.state.userID,
-        "qualtricsID": ''
-      }
-    }
-    const path = "/UserData";
-
-    // Use the API module to save the note to the database
-    try {
-      const apiResponse = await API.put("UserDataCRUD", path, newNote)
-      console.log("response from saving note: " + apiResponse);
-      this.setState({apiResponse});
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
   render() {
     const { state } = this;
-    // if (state.idToken) {
-    //   const jwtBody = state.idToken.split('.')[1];
-    //   const base64 = jwtBody.replace('-', '+').replace('_', '/');
-    //   const decodedJwt = Buffer.from(base64, 'base64');
-    //   state.idTokenJSON = JSON.parse(decodedJwt);
-    //   state.oktaID = JSON.stringify(state.idTokenJSON);
-    //   state.userID = 0;
-
-    // }
     return (
       <Page>
         {!!state.accessToken && (
-          <Form>
-            <Form.Label>Welcome to the Health Application</Form.Label>
-            <Form.Value>{JSON.stringify(state.idTokenJSON)}</Form.Value>
-          </Form>
+          <Text>
+            {/* <Form.Label>Welcome to the Health Application</Form.Label> */}
+            {/* <Form.Value>{JSON.stringify(state.idTokenJSON)}</Form.Value> */}
+            {JSON.stringify(state.oktaID)}
+            {JSON.stringify(state.userID)}
+          </Text>
+          
         )}
 
 

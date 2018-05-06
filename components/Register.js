@@ -14,6 +14,7 @@ import _ from 'lodash';
 import GLOBALS from './Globals.js';
 import Form from 'react-native-form';
 
+
 // TODO: fix registration form styling
 
 // TODO: securely hide the api token
@@ -86,6 +87,8 @@ class Register extends Component<Props> {
       hasError: false,
       errorMessage: '',
       openWebView: false,
+      oktaID: '',
+      userID: '',
     }
   }
 
@@ -187,6 +190,8 @@ class Register extends Component<Props> {
         hasRegistered: true,
         errorMessage: '',
         hasError: false,
+        oktaID: responseJson.id,
+
       });
       console.log("User registration response");
       console.log(responseJson);
@@ -212,7 +217,13 @@ class Register extends Component<Props> {
             <Text style={styles.registeredText}>Thanks! Check your email for a link to finish 
               creating your account! Please click the button below
               to complete our one-time demographic survey.
+
               </Text> 
+              <Text>
+            {JSON.stringify(this.state.oktaID)}
+            </Text>
+      
+              
             <Button 
               style={styles.demographicButton}
               title="Demographic Survey"

@@ -29,8 +29,6 @@ type Props = {};
 export default class Demographics extends Component<Props> {
   constructor() {
     super();
-    const { params } = this.props.navigation.state;
-    const userID = params ? params.userID : null;
     this.createContact = this.createContact.bind(this);
     this.onStart = this.onStart.bind(this);
     this.deleteContact = this.deleteContact.bind(this);

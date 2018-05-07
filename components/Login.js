@@ -102,17 +102,6 @@ export default class App extends Component<{}, State> {
     oktaID: ''
      };
 
-  componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-  }
-
-  componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-  }
-
-  handleBackButton() {
-    return true;
-  }
 
   animateState(nextState: $Shape<State>, delay: number = 0) {
     setTimeout(() => {
@@ -169,6 +158,7 @@ export default class App extends Component<{}, State> {
     const { state } = this;
     this.props.navigation.navigate('Dashboard', {userID: ""});
   }
+  
 
   render() {
     const { state } = this;

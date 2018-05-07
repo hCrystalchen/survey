@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
   textInput: {
     fontSize: 16,
     textAlign:'center',
-    // width: GLOBALS.STYLES.WIDTH, TODO: fix input width
+    marginLeft: '-35%',
+    width: "150%",// TODO: fix input width
     borderColor: GLOBALS.COLOR.LIGHTTAN,
   },
   errorText: {
@@ -207,9 +208,11 @@ class Register extends Component<Props> {
   }
   createID() {
     const { state } = this;
+    {!!state.oktaID && (
     sha256(state.oktaID).then( hash =>{
       state.userID = hash;
     })
+    )}
     
   }
 
@@ -227,15 +230,12 @@ class Register extends Component<Props> {
               to complete our one-time demographic survey.
 
               </Text> 
-              <Text>
-            {JSON.stringify(this.state.oktaID)}
-            </Text>
       
               
             <Button 
               style={styles.demographicButton}
               title="Demographic Survey"
-              onPress={() => this.props.navigation.navigate('Demographics', {userID: authstate.userID})}
+              onPress={() => this.props.navigation.navigate('Demographics')}
             />
           </View>
           : 
